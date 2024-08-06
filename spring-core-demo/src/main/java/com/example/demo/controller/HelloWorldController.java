@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,9 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping(value="/api/")
 public class HelloWorldController {
 
+	@Value("${catalog.name}") 
+	String catalog;
+	
 	int count = 0;
 	
 	@Autowired
@@ -41,7 +45,7 @@ public class HelloWorldController {
 	@GetMapping("/hello")
 	String hello()
 	{
-		log.info("Controller instance "+this);
+		log.info("Controller instance "+this.catalog);
 		count++;
 		return greetService.greet()+ " Count "+count;
 	}
