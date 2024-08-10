@@ -1,0 +1,36 @@
+<html>
+    <script>
+        let module = {
+            payment:function()
+            {    
+                console.log('>>Payment');  
+            },
+            order:function()
+            { 
+                console.log('>>order');  
+            }
+        
+        }
+        function logger(obj)
+        {
+            for(let prop in obj)
+            {
+                if(typeof obj[prop]==='function')
+                {
+                    let oldMethod = obj[prop];
+                    obj[prop] = function()
+                    {
+                        console.log(oldMethod.name, ' started>>');
+                        let ret = oldMethod();
+                        console.log(oldMethod.name, ' ended');
+                        return ret;
+                    }
+                }
+            }
+        }
+        logger(module);
+        module.order();
+        module.payment();
+       
+    </script>
+</html>

@@ -49,4 +49,14 @@ public class HelloWorldController {
 		count++;
 		return greetService.greet()+ " Count "+count;
 	}
+	@GetMapping("/hi")
+	String hi()
+	{
+		return "Hi";
+	}
+	@GetMapping("/exception")
+	String exception()throws Exception
+	{
+		throw new Exception("CustomException");
+	}
 }
