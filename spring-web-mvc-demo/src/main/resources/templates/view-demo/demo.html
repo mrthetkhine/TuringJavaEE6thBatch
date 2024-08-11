@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Home</title>
+  </head>
+ <body>
+    <h1>Welcome to view demo...</h1>
+    <h3 th:text="${message}">Default value</h3>
+	Message 
+	<p th:text="#{view.greeting}">placeholder message</p>
+  </body>
+</html>

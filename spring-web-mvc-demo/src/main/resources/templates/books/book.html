@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+	  <head>
+	      <title>Home</title>
+	      <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}" />
+	  </head>
+ <body>
+    <h1>Book.html</h1>
+	<table class="table table-stripped">
+	    	<thead>
+				<tr> 
+					<th>ID</th>
+					<th>Title</th>
+					<th>Author</th> 
+					<th>Action</th> 
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each="book : ${books}">
+					<tr>
+						<td th:text="${book.id}"></td>
+						<td th:text="${book.title}"></td> 
+						<td th:text="${book.author}"></td>
+						<td>
+						
+							<a class="btn btn-primary" th:href="@{/books/edit/{id}(id=${book.id})}">
+								Edit
+							</a>	
+							&nbsp;
+							<a class="btn btn-primary" th:href="@{/books/delete/{id}(id=${book.id})}">
+								Delete
+							</a>	
+						</td>
+					</tr>
+				</th:block>
+			</tbody>
+	    </table>
+	    
+	  </body>
+  </body>
+</html>
