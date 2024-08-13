@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Home</title>
+  </head>
+ <body>
+    <h1>Welcome to view demo...</h1>
+	<div th:object="${book}">
+	    <p>Id: <span th:text="*{id}">Sebastian</span>.</p>
+	    <p>Title: <span th:text="*{title}">Pepper</span>.</p>
+	    <p>Author: <span th:text="*{author}">Saturn</span>.</p>
+		
+		<a class="btn btn-primary" th:href="@{/books/edit/{id}(id=${book.id})}">
+										Link
+									</a>	
+	  </div>
+  </body>
+</html>

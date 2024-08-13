@@ -5,12 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.javaee6.webmvc.demo.model.BookDto;
 import com.javaee6.webmvc.demo.service.BookService;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -21,6 +26,39 @@ public class BookController {
 	@Autowired
 	BookService bookService;
 	
+	@GetMapping(value="new")
+	String newBook(Model model)
+	{
+		log.info("GET new book");
+		BookDto book = new BookDto();
+		//book.setTitle("Dummy Title");
+		model.addAttribute("book", book);
+		return "books/new.html";
+	}
+	@PostMapping(value="new")
+	String saveBook(Model model,@Valid @ModelAttribute BookDto book,BindingResult bindingResult)
+	{
+		log.info("POST book");
+		if(bindingResult.hasErrors())
+		{
+			log.info("Got erorr in saving book",bindingResult.getAllErrors());
+			
+			for(ObjectError error : bindingResult.getAllErrors())
+			{
+				log.info("Error ",error.getDefaultMessage());
+			}
+			model.addAttribute("book", book);
+			return "books/new.html";
+		}
+		else
+		{
+			log.info("Save book "+book);
+			
+			model.addAttribute("book", book);
+			return "books/new.html";
+		}
+		
+	}
 	@GetMapping
 	String getAllBook(Model model)
 	{

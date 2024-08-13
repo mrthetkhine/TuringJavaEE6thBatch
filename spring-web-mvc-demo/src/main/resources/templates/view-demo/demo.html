@@ -9,5 +9,9 @@
     <h3 th:text="${message}">Default value</h3>
 	Message 
 	<p th:text="#{view.greeting}">placeholder message</p>
+	
+	Today is: <span th:text="${#calendars.format(today,'dd MMMM yyyy')}">13 May 2011</span>
+	
+	<h1 th:if="${admin}"> Admin User</h1>
   </body>
 </html>

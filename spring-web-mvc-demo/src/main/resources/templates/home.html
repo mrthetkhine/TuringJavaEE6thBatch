@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <title>Home</title>
-  </head>
+ <header th:insert="fragments/header.html"> </header>
  <body>
     <h1>Welcome to spring...</h1>
     <img th:src="@{/images/apple.jpeg}"/>
   </body>
+  <footer th:insert="fragments/footer.html"> </header>
 </html>
