@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-	  <head>
-	      <title>Home</title>
-	      <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css}" />
-	  </head>
+	  <header th:insert="~{/fragments/header.html}"> </header>
  <body>
-    <h1>Book.html</h1>
+  
+	<a class="btn btn-primary" th:href="@{/books/new}">
+		New Book
+	</a>
 	<table class="table table-stripped">
 	    	<thead>
 				<tr> 

@@ -1,68 +1,95 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-	  <header th:insert="/fragments/header.html"> </header>
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org" 
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+  layout:decorate="~{/fragments/layout.html}">
+
+	  <style>
+		.error {
+			color:red;
+		}
+	  </style>
  	<body>
-    	New Book
-		<div class="container">
-			<form action="#" th:action="@{/books/new}" 
-							th:object="${book}" 
-							method="POST" 
-							id="addNewBookForm">
-							<div class="form-group">
-								<label for="bookId">Book Id</label>
-								<input  class="form-control" id="bookId" 
-									th:field="*{id}"
-									placeholder="Enter bookid">
-								<div>
-								
-								<span 
-									class="alert alert-danger"
-									th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span>
-								</div>
-								
-							</div>
-							<div class="form-group">
-								<label for="author">Author</label>
-								<input class="form-control" id="author" 
-										th:field="*{author}"
+		
+		<section layout:fragment="content">
+			<div th:text="${newBookSaved}">
+						New Book have been saved
+					</div>
+					<div class="container">
+						<div>
+							&nbsp;
+						</div>
+						<form action="#" th:action="@{/books/new}" 
+										th:object="${book}" 
+										method="POST" 
+										id="addNewBookForm">
 										
-								>
-								<div>
-								<span 
-									class="alert alert-danger"
-									th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="title">Title</label>
-								<input class="form-control" id="title" 
-										th:field="*{title}"
-									>
-								<div>	
-								<span 
-									class="alert alert-danger"
-									th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>	
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="title">Description</label>
-								<input class="form-control" id="description" 
-										th:field="*{description}"
-									>
-								<div>	
-								<span 
-									class="alert alert-danger"
-									th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>	
-								</div>
-							</div>
-							<button type="submit" class="btn btn-primary">Submit</button>
-							<a class="btn btn-primary" th:href="@{/books}">
-								Back
-							</a>
-						</form>
+										<div class="form-group">
+											<label for="bookId">Book Id</label>
+											<input  class="form-control" id="bookId" 
+												th:field="*{id}"
+												placeholder="Enter bookid">
+											<div>
+											
+												<div>
+													<div 
+														class="error"
+														th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></div>
+												</div>
+											
+											</div>
+											
+										</div>
+										<div class="form-group">
+											<label for="author">Author</label>
+											<input class="form-control" id="author" 
+													th:field="*{author}"
+													
+											>
+											<div>
+											<span 
+												class="error"
+												th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="title">Title</label>
+											<input class="form-control" id="title" 
+													th:field="*{title}"
+												>
+											<div>	
+											<span 
+												class="error"
+												th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>	
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="title">Description</label>
+											<input class="form-control" id="description" 
+													th:field="*{description}"
+												>
+											<div>	
+											<span 
+												class="error"
+												th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>	
+											</div>
+										</div>
+										<div class="form-group">
+											<div>
+												&nbsp;
+											</div>
+											<button type="submit" class="btn btn-primary">Submit</button>
+											<a class="btn btn-primary" th:href="@{/books}">
+												Back
+											</a>
+										</div>
+										
+									</form>
+					</div>
 		</div>
 		
+		
 	  </body>
-  </body>
+
 </html>

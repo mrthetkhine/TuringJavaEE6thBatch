@@ -36,26 +36,27 @@ public class BookController {
 		return "books/new.html";
 	}
 	@PostMapping(value="new")
-	String saveBook(Model model,@Valid @ModelAttribute BookDto book,BindingResult bindingResult)
+	String saveBook(@Valid @ModelAttribute("book") BookDto book,BindingResult bindingResult,Model model)
 	{
 		log.info("POST book");
 		if(bindingResult.hasErrors())
 		{
 			log.info("Got erorr in saving book",bindingResult.getAllErrors());
-			
+			/*
 			for(ObjectError error : bindingResult.getAllErrors())
 			{
-				log.info("Error ",error.getDefaultMessage());
+				log.info("Error {}  Message {}",error.getObjectName() ,error.getDefaultMessage());
 			}
-			model.addAttribute("book", book);
+			*/
 			return "books/new.html";
 		}
 		else
 		{
 			log.info("Save book "+book);
-			
-			model.addAttribute("book", book);
-			return "books/new.html";
+			this.bookService.addBook(book);
+			model.addAttribute("newBookSaved", "New Book have been saved");
+			model.addAttribute("book", new BookDto());
+			return "/books/new.html";
 		}
 		
 	}

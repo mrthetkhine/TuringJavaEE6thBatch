@@ -23,5 +23,10 @@ public class BookServiceImpl implements BookService{
 		
 		return this.books;
 	}
+	@Override
+	public void addBook(BookDto book) {
+		this.books.add(book);
+		
+	}
 
 }

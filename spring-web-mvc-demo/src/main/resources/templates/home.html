@@ -1,10 +1,14 @@
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
- <header th:insert="fragments/header.html"> </header>
- <body>
-    <h1>Welcome to spring...</h1>
-    <img th:src="@{/images/apple.jpeg}"/>
-  </body>
-  <footer th:insert="fragments/footer.html"> </header>
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org" 
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+  layout:decorate="~{/fragments/layout.html}">
+<body>
+	<section layout:fragment="content">
+		<h1>Welcome to spring with layout2...</h1>
+		<!--<img th:src="@{/images/apple.jpeg}"/>-->
+	</section>
+</body>
 </html>

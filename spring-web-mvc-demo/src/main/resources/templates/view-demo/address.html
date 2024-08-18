@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org" 
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+  layout:decorate="~{/fragments/layout.html}">
+
+	  <style>
+		.error {
+			color:red;
+		}
+	  </style>
+ 	<body>
+		<div layout:fragment="content">
+			<form action="#" th:action="@{/view-demo/address}" 
+													th:object="${address}" 
+													method="POST" 
+													>
+													
+													<div class="form-group">
+														<label for="city">City</label>
+														
+															<select th:field="*{city}">
+															  <option th:each="cit : ${cities}" 
+															          th:value="${cit}" 
+															          th:text="${cit}">Wireframe</option>
+															</select>
+														
+													</div>
+													
+													<div class="form-group">
+														<div>
+															&nbsp;
+														</div>
+														<button type="submit" class="btn btn-primary">Submit</button>
+														<a class="btn btn-primary" th:href="@{/books}">
+															Back
+														</a>
+													</div>
+													
+												</form>
+		</div>
+ 	</body>
+</html>
+	

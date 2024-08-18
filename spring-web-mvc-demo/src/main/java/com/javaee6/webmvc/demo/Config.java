@@ -9,8 +9,14 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+import org.thymeleaf.spring6.ISpringTemplateEngine;
+import org.thymeleaf.spring6.SpringTemplateEngine;
+import org.thymeleaf.templateresolver.ITemplateResolver;
+import org.thymeleaf.templateresolver.UrlTemplateResolver;
 
 import lombok.extern.slf4j.Slf4j;
+import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
+import nz.net.ultraq.thymeleaf.layoutdialect.decorators.strategies.GroupingStrategy;
 
 @Slf4j
 @Configuration
@@ -33,4 +39,9 @@ public class Config implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 	    registry.addInterceptor(localeChangeInterceptor());
 	}
+	@Bean
+    public LayoutDialect layoutDialect() {
+        return new LayoutDialect(new GroupingStrategy());
+    }
+	
 }
