@@ -1,7 +1,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 	<head>
-	<title>New Book</title>
+	
 	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css} " />
+	<style>
+		.error {
+			color:red;
+		}
+	  </style>
 	</head>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	  <div class="container-fluid">
@@ -20,6 +25,12 @@
 	        
 	        <li class="nav-item">
 	          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+	        </li>
+			<li class="nav-item">
+				<a class="nav-link" href="/?lang=en">En</a>
+	        </li>
+			<li class="nav-item">
+	          <a class="nav-link" href="/?lang=fr">Fr</a>
 	        </li>
 	      </ul>
 	      <form class="d-flex">

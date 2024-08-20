@@ -9,12 +9,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.javaee6.webmvc.demo.model.BookDto;
 import com.javaee6.webmvc.demo.service.BookService;
 
+import jakarta.servlet.ServletRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,14 +33,15 @@ public class BookController {
 	BookService bookService;
 	
 	@GetMapping(value="new")
-	String newBook(Model model)
+	ModelAndView newBook(Model model)
 	{
 		log.info("GET new book");
 		BookDto book = new BookDto();
 		//book.setTitle("Dummy Title");
 		model.addAttribute("book", book);
-		return "books/new.html";
+		return new ModelAndView("books/new.html");
 	}
+	
 	@PostMapping(value="new")
 	String saveBook(@Valid @ModelAttribute("book") BookDto book,BindingResult bindingResult,Model model)
 	{
@@ -42,12 +49,7 @@ public class BookController {
 		if(bindingResult.hasErrors())
 		{
 			log.info("Got erorr in saving book",bindingResult.getAllErrors());
-			/*
-			for(ObjectError error : bindingResult.getAllErrors())
-			{
-				log.info("Error {}  Message {}",error.getObjectName() ,error.getDefaultMessage());
-			}
-			*/
+			
 			return "books/new.html";
 		}
 		else
@@ -60,6 +62,7 @@ public class BookController {
 		}
 		
 	}
+	
 	@GetMapping
 	String getAllBook(Model model)
 	{
@@ -69,4 +72,5 @@ public class BookController {
 		
 		return "books/book.html";
 	}
+	
 }
