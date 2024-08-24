@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.javaee6.webmvc.demo.model.Address;
 import com.javaee6.webmvc.demo.model.BookDto;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -21,6 +23,13 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/view-demo")
 public class ViewDemoController {
 
+	@ExceptionHandler(RuntimeException.class)
+	String erorr(HttpServletRequest req,RuntimeException ex)
+	{
+		log.info("Error at "+req.getRequestURL());
+		log.info("Exception happened in view-demo controller "+ex.getMessage());
+		return "/view-demo/error.html";
+	}
 	@GetMapping
 	String viewDemo(Model model)
 	{
@@ -28,7 +37,12 @@ public class ViewDemoController {
 		model.addAttribute("admin", false);
 		return "/view-demo/demo";
 	}
-	
+	@GetMapping(value="/problem")
+	String problemMethod(Model model)
+	{
+		throw new RuntimeException("Something happened in controller");
+		//return "/view-demo/demo";
+	}
 	@GetMapping(value="/another")
 	String another(Model model)
 	{

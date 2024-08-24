@@ -17,7 +17,7 @@
 						<div>
 							&nbsp;
 						</div>
-						<form action="#" th:action="@{/books/new}" 
+						<form action="#" th:action="${edit}?@{/books/edit}:@{/books/new}" 
 										th:object="${book}" 
 										method="POST" 
 										id="addNewBookForm">

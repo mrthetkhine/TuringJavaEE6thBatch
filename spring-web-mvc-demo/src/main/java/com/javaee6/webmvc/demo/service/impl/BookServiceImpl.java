@@ -2,6 +2,7 @@ package com.javaee6.webmvc.demo.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -28,5 +29,28 @@ public class BookServiceImpl implements BookService{
 		this.books.add(book);
 		
 	}
-
+	@Override
+	public Optional<BookDto> getBookById(Long bookId) {
+		
+		BookDto result = null;
+		for(int i=0;i< this.books.size();i++)
+		{
+			BookDto book = this.books.get(i);
+			if(book.getId().equals(bookId))
+			{
+				result = book;
+				break;
+			}
+		}
+		return result==null? Optional.empty() : Optional.of(result);
+	}
+	@Override
+	public void updateBook(BookDto book) {
+		BookDto bookToUpdate = this.getBookById(book.getId()).get();
+		bookToUpdate.setAuthor(book.getAuthor());
+		bookToUpdate.setTitle(book.getTitle());
+		bookToUpdate.setDescription(book.getDescription());
+	}
+	
+	
 }
