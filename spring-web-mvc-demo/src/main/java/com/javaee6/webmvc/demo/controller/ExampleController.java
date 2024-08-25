@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.javaee6.webmvc.demo.model.BookDto;
+import com.javaee6.webmvc.demo.model.dto.BookDto;
 import com.javaee6.webmvc.demo.service.BookService;
 
 import jakarta.servlet.ServletRequest;

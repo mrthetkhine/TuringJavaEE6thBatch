@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.javaee6.webmvc.demo.model.BookDto;
+import com.javaee6.webmvc.demo.model.dto.BookDto;
 import com.javaee6.webmvc.demo.service.BookService;
 import com.javaee6.webmvc.demo.validator.BookValidator;
 
@@ -46,6 +46,16 @@ public class BookController {
 	@InitBinder
 	private void initBinder(WebDataBinder binder) {
 		binder.setValidator(validator);
+	}
+	
+	@GetMapping
+	String getAllBook(Model model)
+	{
+		List<BookDto> books = this.bookService.getAllBook();
+		log.info("books.length ",books.size());
+		model.addAttribute("books", books);
+		
+		return "books/book.html";
 	}
 	
 	@GetMapping(value="new")
@@ -105,15 +115,7 @@ public class BookController {
 		
 	}
 	
-	@GetMapping
-	String getAllBook(Model model)
-	{
-		List<BookDto> books = this.bookService.getAllBook();
-		log.info("books.length ",books.size());
-		model.addAttribute("books", books);
-		
-		return "books/book.html";
-	}
+	
 	@GetMapping(value="edit/{bookId}")
 	String editBook(Model model,@PathVariable Long bookId)
 	{
@@ -150,6 +152,23 @@ public class BookController {
 			
 		}
 		
+		
+	}
+	@GetMapping(value="delete/{bookId}")
+	String deleteBook(Model model,@PathVariable Long bookId)
+	{
+		log.info("edit book "+bookId);
+		Optional<BookDto> result = this.bookService.getBookById(bookId);
+		//book.setTitle("Dummy Title");
+		if(result.isPresent())
+		{
+			this.bookService.deleteBook(result.get());
+			return "redirect:/books";
+		}
+		else
+		{
+			return "books/not-found.html";
+		}
 		
 	}
 }

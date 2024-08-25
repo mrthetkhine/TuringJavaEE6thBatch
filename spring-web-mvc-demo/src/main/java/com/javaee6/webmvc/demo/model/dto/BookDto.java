@@ -1,4 +1,4 @@
-package com.javaee6.webmvc.demo.model;
+package com.javaee6.webmvc.demo.model.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

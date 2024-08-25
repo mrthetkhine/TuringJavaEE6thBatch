@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+	  <header th:insert="~{/fragments/header.html}"> </header>
+ <body>
+  
+	<h1>Todos from remote server</h1>
+	<table class="table table-stripped">
+	    	<thead>
+				<tr> 
+					<th>ID</th>
+					<th>UserId</th>
+					<th>Title</th> 
+					<th>Completed</th> 
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each="todo : ${todos}">
+					<tr>
+						<td th:text="${todo.id}"></td>
+						<td th:text="${todo.userId}"></td> 
+						<td th:text="${todo.title}"></td> 
+						<td th:text="${todo.completed}"></td>
+						
+					</tr>
+				</th:block>
+			</tbody>
+	    </table>
+	    
+	  </body>
+  </body>
+</html>

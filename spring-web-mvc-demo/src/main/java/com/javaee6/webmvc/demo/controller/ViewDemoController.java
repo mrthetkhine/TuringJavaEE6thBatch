@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.javaee6.webmvc.demo.model.Address;
-import com.javaee6.webmvc.demo.model.BookDto;
+import com.javaee6.webmvc.demo.model.dto.BookDto;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;

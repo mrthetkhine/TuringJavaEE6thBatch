@@ -6,8 +6,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.javaee6.webmvc.demo.controller.BookController;
-import com.javaee6.webmvc.demo.model.BookDto;
-
+import com.javaee6.webmvc.demo.model.dto.BookDto;
 
 import lombok.extern.slf4j.Slf4j;
 

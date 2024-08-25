@@ -6,7 +6,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.javaee6.webmvc.demo.model.BookDto;
+import com.javaee6.webmvc.demo.model.dto.BookDto;
 import com.javaee6.webmvc.demo.service.BookService;
 
 @Service
@@ -50,6 +50,11 @@ public class BookServiceImpl implements BookService{
 		bookToUpdate.setAuthor(book.getAuthor());
 		bookToUpdate.setTitle(book.getTitle());
 		bookToUpdate.setDescription(book.getDescription());
+	}
+	@Override
+	public void deleteBook(BookDto book) {
+		this.books.remove(book);
+		
 	}
 	
 	
