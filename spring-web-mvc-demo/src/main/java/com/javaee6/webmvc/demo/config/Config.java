@@ -1,12 +1,23 @@
-package com.javaee6.webmvc.demo;
+package com.javaee6.webmvc.demo.config;
 
+import java.time.Duration;
 import java.util.Locale;
 
+import org.apache.hc.client5.http.classic.HttpClient;
+import org.apache.hc.client5.http.config.ConnectionConfig;
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
+import org.apache.hc.core5.http.io.SocketConfig;
+import org.apache.hc.core5.util.Timeout;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -47,24 +58,5 @@ public class Config implements WebMvcConfigurer {
     public LayoutDialect layoutDialect() {
         return new LayoutDialect(new GroupingStrategy());
     }
-	@Value("${todo.baseURI}")
-	String baseURI;
-
-	@Bean
-	RestClient restClient() {
-	  return RestClient
-			  .builder()
-			  .requestFactory(getClientHttpRequestFactory())
-			  .baseUrl(baseURI)
-			  .build();
-			  
-	}
-	private ClientHttpRequestFactory getClientHttpRequestFactory() {
-		log.info("getClientHttpRequestFactory");
-        HttpComponentsClientHttpRequestFactory clientHttpRequestFactory = new HttpComponentsClientHttpRequestFactory();
-        clientHttpRequestFactory.setConnectTimeout(100);
-        clientHttpRequestFactory.setConnectionRequestTimeout(70);
-        
-        return clientHttpRequestFactory;
-    }
+	
 }
