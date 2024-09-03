@@ -58,18 +58,18 @@ public class ViewDemoController {
 		model.addAttribute("book", bookDto);
 		return "/view-demo/book";
 	}
-	
+
 	@GetMapping(value="/address")
 	String newAddress(Model model)
 	{
 		Address address = new Address();
 		model.addAttribute("address",address);
-		
+
 		List<String> cities = new ArrayList<>();
 		cities.add("Yangon");
 		cities.add("Mandalay");
 		cities.add("NayPyiTaw");
-		
+
 		model.addAttribute("cities",cities);
 		return "/view-demo/address";
 	}
@@ -79,12 +79,12 @@ public class ViewDemoController {
 		log.info("Save address City "+addressDto.getCity());
 		Address address = new Address();
 		model.addAttribute("address",address);
-		
+
 		List<String> cities = new ArrayList<>();
 		cities.add("Yangon");
 		cities.add("Mandalay");
 		cities.add("NayPyiTaw");
-		
+
 		model.addAttribute("cities",cities);
 		return "/view-demo/address";
 	}

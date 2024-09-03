@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ExampleController {
 	@Autowired
 	BookService bookService;
-	
+
 	@GetMapping(value="api")
 	@ResponseBody
 	List<BookDto> getAllBooksApi(ServletRequest request,
@@ -33,8 +33,8 @@ public class ExampleController {
 		List<BookDto> books = this.bookService.getAllBook();
 		return books;
 	}
-	
-	
+
+
 	@GetMapping(value="api/{bookId}")
 	@ResponseBody
 	BookDto getBookById(@PathVariable Integer bookId)
@@ -42,7 +42,7 @@ public class ExampleController {
 		List<BookDto> books = this.bookService.getAllBook();
 		return books.get(bookId);
 	}
-	
+
 	@GetMapping(value="search")
 	@ResponseBody
 	List<BookDto> searchApi(@RequestParam String query)

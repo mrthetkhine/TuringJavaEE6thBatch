@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClient;
 
-import com.javaee6.webmvc.demo.controller.TodoController;
 import com.javaee6.webmvc.demo.model.dto.TodoDto;
 import com.javaee6.webmvc.demo.service.TodoService;
 
@@ -19,13 +18,13 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/api/todos")
 public class TodoApiController {
-	
+
 	@Autowired
 	RestClient restClient;
-	
+
 	@Autowired
 	TodoService todoService;
-	
+
 	@GetMapping
 	List<TodoDto> getAllTodos()
 	{

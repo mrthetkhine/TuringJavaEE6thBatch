@@ -4,13 +4,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
-import com.javaee6.webmvc.demo.controller.ViewDemoController;
-
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@ControllerAdvice
+//@ControllerAdvice
 public class GloabalExceptionHandler {
 	@ExceptionHandler(value = Exception.class)
 	  public String defaultErrorHandler(HttpServletRequest req, Exception e) throws Exception {

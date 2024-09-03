@@ -1,24 +1,22 @@
 package com.javaee6.webmvc.demo.config;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.client.ClientHttpRequestFactory;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.http.client.SimpleClientHttpRequestFactory;
-import org.springframework.web.client.RestClient;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
 import java.time.Duration;
 
 import org.apache.hc.client5.http.classic.HttpClient;
 import org.apache.hc.client5.http.config.ConnectionConfig;
 import org.apache.hc.client5.http.config.RequestConfig;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
 import org.apache.hc.core5.http.io.SocketConfig;
 import org.apache.hc.core5.util.Timeout;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.client.ClientHttpRequestFactory;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.RestClient;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -29,16 +27,16 @@ public class WebClientConfig  implements WebMvcConfigurer{
 
 	@Value("${webclient.connecttimeout}")
 	long connectTimeout;
-	
+
 	@Value("${webclient.sockettimeout}")
 	long socketTimeout;
-	
+
 	@Value("${webclient.requesttimeout}")
 	long requestTimeout;
-	
+
 	@Value("${webclient.readTimeout}")
 	long readTimeout;
-	
+
 	@Bean
 	RestClient restClient() {
 	  return RestClient
@@ -46,9 +44,9 @@ public class WebClientConfig  implements WebMvcConfigurer{
 			  .requestFactory(getClientHttpRequestFactory())
 			  .baseUrl(baseURI)
 			  .build();
-			  
+
 	}
-	
+
 	private ClientHttpRequestFactory getClientHttpRequestFactory() {
 		log.info("getClientHttpRequestFactory");
 		/*
@@ -56,8 +54,8 @@ public class WebClientConfig  implements WebMvcConfigurer{
 		factory.setConnectTimeout(300);
 		factory.setReadTimeout(3000);
 		*/
-		
-		
+
+
         ConnectionConfig connectionConfig = ConnectionConfig.custom()
                 .setConnectTimeout(Timeout.ofMilliseconds(connectTimeout))
                 .build();
@@ -81,14 +79,14 @@ public class WebClientConfig  implements WebMvcConfigurer{
                 .setDefaultRequestConfig(requestConfig)
                 .build();
 
-		
+
 		HttpComponentsClientHttpRequestFactory factory =new HttpComponentsClientHttpRequestFactory(httpClient);
 		//read timeout
 		factory.setConnectionRequestTimeout(Duration.ofMillis(readTimeout));
 		factory.setConnectTimeout((int)connectTimeout);
-		
-		
-	    
+
+
+
         return factory;
     }
 }

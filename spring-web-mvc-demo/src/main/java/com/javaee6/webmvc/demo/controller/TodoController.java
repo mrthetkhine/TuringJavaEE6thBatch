@@ -12,7 +12,6 @@ import org.springframework.web.client.RestClient;
 
 import com.javaee6.webmvc.demo.model.dto.TodoDto;
 
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -22,7 +21,7 @@ public class TodoController {
 
 	@Autowired
 	RestClient restClient;
-	
+
 	@GetMapping
 	String fetchAllTodos(Model model)
 	{

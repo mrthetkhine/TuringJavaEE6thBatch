@@ -13,7 +13,7 @@ public class TodoServiceImpl implements TodoService{
 
 	@Override
 	public List<TodoDto> getAllTodos() {
-		List<TodoDto> todos = new ArrayList<TodoDto>();
+		List<TodoDto> todos = new ArrayList<>();
 		todos.add(new TodoDto(1L,1L,"Title 1",true));
 		todos.add(new TodoDto(1L,2L,"Title 2",false));
 		todos.add(new TodoDto(1L,3L,"Title 3",false));

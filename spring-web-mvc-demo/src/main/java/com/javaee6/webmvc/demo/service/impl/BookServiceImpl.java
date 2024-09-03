@@ -13,7 +13,7 @@ import com.javaee6.webmvc.demo.service.BookService;
 public class BookServiceImpl implements BookService{
 
 	List<BookDto> books = new ArrayList<>();
-	
+
 	BookServiceImpl()
 	{
 		this.books.add(new BookDto(1L,"Title1 ","Author 1","Description1"));
@@ -21,21 +21,19 @@ public class BookServiceImpl implements BookService{
 	}
 	@Override
 	public List<BookDto> getAllBook() {
-		
+
 		return this.books;
 	}
 	@Override
 	public void addBook(BookDto book) {
 		this.books.add(book);
-		
+
 	}
 	@Override
 	public Optional<BookDto> getBookById(Long bookId) {
-		
+
 		BookDto result = null;
-		for(int i=0;i< this.books.size();i++)
-		{
-			BookDto book = this.books.get(i);
+		for (BookDto book : this.books) {
 			if(book.getId().equals(bookId))
 			{
 				result = book;
@@ -54,8 +52,8 @@ public class BookServiceImpl implements BookService{
 	@Override
 	public void deleteBook(BookDto book) {
 		this.books.remove(book);
-		
+
 	}
-	
-	
+
+
 }

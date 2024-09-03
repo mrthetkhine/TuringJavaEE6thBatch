@@ -5,7 +5,6 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.javaee6.webmvc.demo.controller.BookController;
 import com.javaee6.webmvc.demo.model.dto.BookDto;
 
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +21,7 @@ public class BookValidator implements Validator{
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		//Title not null 
+		//Title not null
 		//Must start with capital letter
 		log.info("BookDTO validation started");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "title", "required.book.title");
@@ -36,7 +35,7 @@ public class BookValidator implements Validator{
 			{
 				errors.rejectValue("title", "uppercase");
 			}
-			
+
 		}
 	}
 
