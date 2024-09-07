@@ -9,11 +9,17 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.ObjectError;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.http.HttpHeaders;
-import com.javaee6.webmvc.demo.controller.api.BookApiConroller;
+
 import com.javaee6.webmvc.demo.controller.api.dto.ApiError;
 import com.javaee6.webmvc.demo.controller.api.dto.ErrorCode;
 import com.javaee6.webmvc.demo.controller.api.exception.*;
+import com.javaee6.webmvc.demo.controller.api.impl.BookApiConroller;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,6 +50,22 @@ public class RestApiAdvice extends ResponseEntityExceptionHandler{
 	
 		    ApiError apiError = 
 		      new ApiError(HttpStatus.NOT_FOUND, ErrorCode.INVALID_BOOK_ID_TYPE.toString(), ex.getLocalizedMessage(), error);
+		    return new ResponseEntity<Object>(
+		      apiError, new HttpHeaders(), apiError.getStatus());
+	}
+	  @ExceptionHandler(BeanValidationException.class)
+	  public ResponseEntity<Object> handleValidationException(BeanValidationException ex, WebRequest request) 
+	  {
+				
+			log.info("BeanValidationException");
+		    List<String> errorMessage =new ArrayList<String>();
+		    for (ObjectError error : ex.getErrors())
+		    {
+		    	errorMessage.add(error.getDefaultMessage());
+		    }
+	
+		    ApiError apiError = 
+		      new ApiError(HttpStatus.BAD_REQUEST, ErrorCode.BEAN_VALIDATION_ERROR.toString(), ex.getLocalizedMessage(), errorMessage);
 		    return new ResponseEntity<Object>(
 		      apiError, new HttpHeaders(), apiError.getStatus());
 	}
