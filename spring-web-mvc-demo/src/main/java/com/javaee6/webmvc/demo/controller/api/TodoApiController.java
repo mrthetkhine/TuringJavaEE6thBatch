@@ -31,7 +31,7 @@ public class TodoApiController {
 		log.info("/api/todos threadname "+Thread.currentThread().getName());
 		try
 		{
-			Thread.sleep( 2_000);
+			Thread.sleep( (60)*1_000);
 		}
 		catch(Exception e)
 		{

@@ -6,8 +6,8 @@ import com.javaee6.webmvc.demo.model.dto.BookDto;
 
 public interface BookService {
 	List<BookDto> getAllBook();
-	void addBook(BookDto book);
+	BookDto addBook(BookDto book);
 	Optional<BookDto> getBookById(Long bookId);
-	void updateBook(BookDto book);
-	void deleteBook(BookDto book);
+	BookDto updateBook(BookDto book);
+	BookDto deleteBook(BookDto book);
 }

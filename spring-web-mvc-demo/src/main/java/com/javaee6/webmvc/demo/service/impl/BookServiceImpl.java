@@ -3,56 +3,76 @@ package com.javaee6.webmvc.demo.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.javaee6.webmvc.demo.common.Mapper;
+import com.javaee6.webmvc.demo.dao.BookDao;
+import com.javaee6.webmvc.demo.model.Book;
 import com.javaee6.webmvc.demo.model.dto.BookDto;
 import com.javaee6.webmvc.demo.service.BookService;
 
 @Service
 public class BookServiceImpl implements BookService{
 
-	List<BookDto> books = new ArrayList<>();
+	@Autowired
+	BookDao bookDao;
+	
+	//ModelMapper modelMapper = new ModelMapper();
+	@Autowired
+	Mapper mapper;
+	
+	
 
 	BookServiceImpl()
 	{
-		this.books.add(new BookDto(1L,"Title1 ","Author 1","Description1"));
-		this.books.add(new BookDto(2L,"Title 2 ","Author 2","Description 2"));
+		
 	}
 	@Override
 	public List<BookDto> getAllBook() {
 
-		return this.books;
+		List<Book> books = this.bookDao.getAllBook();
+		List<BookDto> bookList = mapper.mapList(books, BookDto.class);
+		return bookList;
 	}
+	
+	
 	@Override
-	public void addBook(BookDto book) {
-		this.books.add(book);
-
+	public BookDto addBook(BookDto bookDto) {
+		Book book = this.bookDao.saveBook(bookDto);
+		BookDto dto = this.mapper.getMapper().map(book, BookDto.class);
+		
+		return dto;
 	}
 	@Override
 	public Optional<BookDto> getBookById(Long bookId) {
 
-		BookDto result = null;
-		for (BookDto book : this.books) {
-			if(book.getId().equals(bookId))
-			{
-				result = book;
-				break;
-			}
+		Optional<Book> book = this.bookDao.getBookById(bookId);
+		if(book.isPresent())
+		{
+			BookDto dto = this.mapper.getMapper().map(book.get(), BookDto.class);
+			return Optional.of(dto);
 		}
-		return result==null? Optional.empty() : Optional.of(result);
+		else
+		{
+			return Optional.empty();
+		}
+		
 	}
 	@Override
-	public void updateBook(BookDto book) {
-		BookDto bookToUpdate = this.getBookById(book.getId()).get();
-		bookToUpdate.setAuthor(book.getAuthor());
-		bookToUpdate.setTitle(book.getTitle());
-		bookToUpdate.setDescription(book.getDescription());
+	public BookDto updateBook(BookDto bookDto) {
+		Book updatedBook = this.bookDao.updateBook(bookDto);
+		BookDto dto = this.mapper.map(updatedBook, BookDto.class);
+		return dto;
 	}
 	@Override
-	public void deleteBook(BookDto book) {
-		this.books.remove(book);
-
+	public BookDto deleteBook(BookDto bookDto) {
+		Book book =  this.bookDao.deleteBookById(bookDto.getId());
+		BookDto dto = this.mapper.map(book, BookDto.class);
+		return dto;
 	}
 
 

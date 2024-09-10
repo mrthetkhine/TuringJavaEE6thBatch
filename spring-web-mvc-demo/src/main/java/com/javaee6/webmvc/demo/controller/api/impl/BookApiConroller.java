@@ -57,8 +57,8 @@ public class BookApiConroller implements BookApi {
 		log.info("binding result "+bindingResult.hasErrors() );
 		if(!bindingResult.hasErrors())
 		{
-			this.bookService.addBook(bookdDto);
-			return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(bookdDto);
+			BookDto insertedBook = this.bookService.addBook(bookdDto);
+			return ResponseEntity.status(HttpStatusCode.valueOf(201)).body(insertedBook);
 		}
 		else
 		{
@@ -69,7 +69,7 @@ public class BookApiConroller implements BookApi {
 
 	@Override
 	public ResponseEntity<BookDto> updateBookById(Long bookId,
-													@Valid @RequestBody BookDto bookdDto,
+													@Valid @RequestBody BookDto bookDto,
 													BindingResult bindingResult) 
 															throws BookNotFoundException, BeanValidationException {
 		if(!bindingResult.hasErrors())
@@ -78,8 +78,8 @@ public class BookApiConroller implements BookApi {
 			
 			if(book.isPresent())
 			{
-				this.bookService.updateBook(book.get());
-				return ResponseEntity.of(book);
+				BookDto dto =  this.bookService.updateBook(bookDto);
+				return ResponseEntity.of(Optional.of(dto));
 			}
 			else
 			{
@@ -98,8 +98,8 @@ public class BookApiConroller implements BookApi {
 		Optional<BookDto> book = this.bookService.getBookById(bookId);
 		if(book.isPresent())
 		{
-			this.bookService.deleteBook(book.get());
-			return ResponseEntity.of(book);
+			BookDto deletedBook = this.bookService.deleteBook(book.get());
+			return ResponseEntity.of(Optional.of(deletedBook));
 		}
 		else
 		{
