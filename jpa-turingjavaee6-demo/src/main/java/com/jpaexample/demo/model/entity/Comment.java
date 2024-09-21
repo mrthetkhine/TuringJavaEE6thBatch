@@ -1,28 +1,34 @@
 package com.jpaexample.demo.model.entity;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 
-@Data
 @Entity
-public class MovieDetails extends BaseEntity{
+@Data
+@Slf4j
+@EqualsAndHashCode(callSuper=true)
+public class Comment extends BaseEntity{
 
 	private static final long serialVersionUID = 1L;
 	
 	@Column
-	String details;
-	
+	private String comment;
+
 	@JsonIgnore
 	@ToString.Exclude
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "movie_id")
-	private Movie movie;
-
+	@ManyToOne(
+			cascade= CascadeType.ALL
+			)
+	@JoinColumn(name="movie_id")
+	Movie movie;
 }
