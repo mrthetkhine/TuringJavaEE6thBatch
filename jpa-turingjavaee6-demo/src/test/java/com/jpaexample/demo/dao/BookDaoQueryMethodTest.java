@@ -103,10 +103,12 @@ public class BookDaoQueryMethodTest {
 	}
 	*/
 	@Test
+	
 	void testFindByTitleQuery()
 	{
 		
-		Book book = this.bookDao.findByBookTitle("Title 1");
+		//Book book = this.bookDao.findByBookTitle("Title 1");
+		Book book = this.bookDao.findByBookTitleWithNative("Title 1");
 		log.info("Book "+book);
 	}
 }

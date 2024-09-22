@@ -61,4 +61,12 @@ public class Movie extends BaseEntity{
             inverseJoinColumns = { @JoinColumn(name = "actor_id") })
 	List<Actor> actors=new ArrayList<>();
 
+	@ManyToMany(
+			fetch=FetchType.LAZY,
+			cascade=CascadeType.ALL
+			)
+	@JoinTable(name="director_in_movie",
+			joinColumns = { @JoinColumn(name = "movie_id") },
+            inverseJoinColumns = { @JoinColumn(name = "director_id") })
+	List<Director> directors=new ArrayList<>();
 }

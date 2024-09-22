@@ -20,6 +20,12 @@ public interface BookDao extends JpaRepository<Book, Long> {
 	List<Book> findByAuthorOrderByYearDesc(String author);
 	List<Book> findByYearIn(List<Long> years);
 	
-	@Query("select b from Book b where b.title = ?1")
+	//HQL, JPQL
+	@Query("SELECT b from Book b where b.title = ?1")
 	Book findByBookTitle(String title);
+	
+	//Native SQL
+	@Query(value="SELECT * from Book b where b.title = ?1",nativeQuery=true)
+	Book findByBookTitleWithNative(String title);
+
 }

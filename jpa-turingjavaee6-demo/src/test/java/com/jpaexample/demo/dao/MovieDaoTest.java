@@ -105,6 +105,7 @@ public class MovieDaoTest {
 			log.info(movie.getTitle());
 		}
 	}*/
+	/*
 	@Test 
 	@Transactional
 	void testLazyLoading()
@@ -118,5 +119,13 @@ public class MovieDaoTest {
 		{
 			log.info("Actor "+actor);
 		}
+	}*/
+	@Test
+	@Transactional 
+	void testNativeQuery()
+	{
+		Movie movie = this.movieDao.findMovieWithTitleInNative("Movie 1");
+		log.info("Title "+movie.getTitle());
+		log.info("No of Actors "+movie.getActors().size());
 	}
 }
