@@ -88,7 +88,7 @@ public class MovieHQLTest {
 		}
 		
 	}*/
-	
+	/*
 	@Transactional
 	@Test
 	public void tetGetAllMovieWithTitle()
@@ -100,7 +100,7 @@ public class MovieHQLTest {
 			log.info("Movie "+movie);
 		}
 		
-	}
+	}*/
 	/*
 	@Transactional
 	@Test
@@ -149,4 +149,80 @@ public class MovieHQLTest {
 		}
 		
 	}*/
+	/*
+	@Transactional
+	@Test
+	public void testMovieWithActorIn()
+	{
+		List<Movie> movies = this.movieDao.getMovieWithActorIn("Actor", "One");
+		for(Movie movie : movies)
+		{
+			log.info("Movie "+movie);
+		}
+	}*/
+	
+	/*
+	@Transactional
+	@Test
+	public void testMovieWithActorWithFirstNameIn()
+	{
+		List<Movie> movies = this.movieDao.getMovieWithActorWithFristNameIn("Actor");
+		for(Movie movie : movies)
+		{
+			log.info("Movie "+movie);
+		}
+	}*/
+	/*
+	@Transactional
+	@Test
+	public void testGetMovieWithComment()
+	{
+		List<Movie> movies = this.movieDao.getMovieWithComments();
+		for(Movie movie : movies)
+		{
+			log.info("Movie "+movie);
+		}
+	}
+	*/
+	/*
+	@Transactional
+	@Test
+	public void testGetMovieWithComment()
+	{
+		List<Movie> movies = this.movieDao.getMovieWithCommentIn("Comment 1");
+		for(Movie movie : movies)
+		{
+			log.info("Movie "+movie);
+		}
+	}*/
+	/*
+	@Transactional
+	@Test
+	public void testGetMovieWithCommentWithPath()
+	{
+		List<Movie> movies = this.movieDao.getMovieWithDetailPath("Movie 1 Details");
+		for(Movie movie : movies)
+		{
+			log.info("Movie "+movie);
+		}
+	}*/
+	/*
+	@Transactional
+	@Test
+	public void testMovieWithOrderByTitle()
+	{
+		List<Movie> movies = this.movieDao.getMovieOrderByTitle();
+		for(Movie movie : movies)
+		{
+			log.info("Movie "+movie);
+		}
+	}
+	*/
+	@Test
+	@Transactional
+	void testInsertTwoMovies()
+	{
+		int rowEffected = this.movieDao.insertTwoMovie( "MovieTitle1", "MovieTitle1");
+		log.info("No of row updated "+rowEffected);
+	}
 }

@@ -32,25 +32,29 @@ public class ActorDaoTest {
 	@Autowired 
 	ActorDao actorDao;
 	
-	
+	/*
 	@Test
 	void insertActor()
 	{
-		Actor actor = new Actor();
+		for(int i=0;i< 30;i++)
+		{
+			Actor actor = new Actor();
+			
+			Name name = new Name();
+			name.setFirstName("Actor");
+			name.setLastName(String.valueOf(i+5));
+			
+			actor.setName(name);
+			actor.setGender(Gender.Male);
+			
+			Date birthDate = new GregorianCalendar(1974, 10, 11).getTime();
+			actor.setBirthday(birthDate);
+			
+			this.actorDao.save(actor);
+		}
 		
-		Name name = new Name();
-		name.setFirstName("Leonardo");
-		name.setLastName("Dicapario");
-		
-		actor.setName(name);
-		actor.setGender(Gender.Male);
-		
-		Date birthDate = new GregorianCalendar(1974, 10, 11).getTime();
-		actor.setBirthday(birthDate);
-		
-		this.actorDao.save(actor);
 	}
-	
+	*/
 	/*
 	@Test 
 	void getActorById()

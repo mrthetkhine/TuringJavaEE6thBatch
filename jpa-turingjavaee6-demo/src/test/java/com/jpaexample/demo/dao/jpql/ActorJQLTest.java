@@ -5,6 +5,9 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.annotation.Rollback;
 
 import com.jpaexample.demo.dao.ActorDao;
@@ -44,7 +47,9 @@ public class ActorJQLTest {
 		{
 			log.info("BirthdayYear " +year);
 		}
+		
 	}*/
+	/*
 	@Test
 	@Transactional
 	void testAllActorWithGenderIsNull()
@@ -55,5 +60,49 @@ public class ActorJQLTest {
 		{
 			log.info("Actor " +actor);
 		}
-	}
+	}*/
+	/*
+	@Test
+	@Transactional
+	void testGetAllActorWithLimitOffset()
+	{
+		//10, 0->first page
+		List<Actor> actors = this.actorDao.getActorWithLimitOffset(10,10);
+		
+		for(Actor actor:actors)
+		{
+			log.info("Actor " +actor);
+		}
+	}*/
+	/*
+	@Test
+	@Transactional
+	void testPaging()
+	{
+		Pageable firstPageWithTwoElements = PageRequest.of(1, 10);
+		//10, 0->first page
+		Page<Actor> actors = this.actorDao.findAll(firstPageWithTwoElements);
+		
+		for(Actor actor:actors)
+		{
+			log.info("Actor " +actor);
+		}
+	}*/
+	/*
+	@Test
+	@Transactional
+	void testUpdateQuery()
+	{
+		int rowEffected = this.actorDao.updateActorNameById(6L, "Actor", "Six");
+		log.info("No of row updated "+rowEffected);
+	}*/
+	/*
+	@Test
+	@Transactional
+	void testDeleteQuery()
+	{
+		int rowEffected = this.actorDao.deleteActorByName( "Actor", "34");
+		log.info("No of row updated "+rowEffected);
+	}*/
+	
 }
