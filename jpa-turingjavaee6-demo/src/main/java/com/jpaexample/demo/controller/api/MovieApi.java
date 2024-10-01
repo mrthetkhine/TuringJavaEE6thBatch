@@ -15,6 +15,8 @@ import com.jpaexample.demo.dao.MovieDao;
 import com.jpaexample.demo.model.entity.Book;
 import com.jpaexample.demo.model.entity.Movie;
 
+import jakarta.transaction.Transactional;
+
 @RestController
 @RequestMapping("/api/movies")
 public class MovieApi {
@@ -22,11 +24,21 @@ public class MovieApi {
 	@Autowired
 	MovieDao movieDao;
 
+	//@Transactional
 	@GetMapping
-	List<Movie> getAllBooks()
+	List<Movie> getAllMovie()
 	{
+		try
+		{
+			Thread.sleep(60_000);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 		return this.movieDao.findAll();
 	}
+	
 	
 	@GetMapping("/{movieId}")
 	Optional<Movie> getMovieById(@PathVariable Long movieId)
