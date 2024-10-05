@@ -36,12 +36,12 @@ public class MovieDaoTest {
 	
 	@Autowired
 	MovieDetailsDao movieDetailsDao;
-	/*
+	
 	@Test
 	void insertMovie()
 	{
 		Movie movie = new Movie();
-		movie.setTitle("Movie 2");
+		movie.setTitle("Movie 9");
 		movie.setGenre("Drama");
 		movie.setYear(2015);
 		
@@ -51,11 +51,11 @@ public class MovieDaoTest {
 		movieDetails.setDetails("Movie 2 Details");
 		movie.setMovieDetails(movieDetails);
 		
-		movieDetails.setMovie(movie);
+		//movieDetails.setMovie(movie);
 		movieDao.save(movie);
 		
 		
-	}*/
+	}
 	/*
 	@Test
 	@Transactional

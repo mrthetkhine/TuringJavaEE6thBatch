@@ -16,7 +16,7 @@ import jakarta.transaction.Transactional;
 @Repository
 public interface ActorDao extends PagingAndSortingRepository<Actor, Long> {
 
-	@Query("SELECT actor from Actor actor WHERE (actor.name.firstName,actor.name.lastName)=(?1,?2)")
+	@Query("SELECT actor from Actor actor WHERE (actor.firstName,actor.lastName)=(?1,?2)")
 	List<Actor> getActorWithName(String firstName, String lastName);
 	
 	@Query("SELECT extract (year from birthday) FROM Actor ")
@@ -30,13 +30,13 @@ public interface ActorDao extends PagingAndSortingRepository<Actor, Long> {
 	
 	@Modifying
 	@Transactional
-	@Query("UPDATE Actor actor SET actor.name.firstName = ?2, actor.name.lastName=?3 WHERE actor.id = ?1")
+	@Query("UPDATE Actor actor SET actor.firstName = ?2, actor.lastName=?3 WHERE actor.id = ?1")
 	int updateActorNameById(Long id, String firstName, String lastName);
 	
 	//Do not use delete with like in production
 	@Modifying
 	@Transactional
-	@Query("DELETE Actor actor WHERE actor.name.firstName LIKE ?1 AND actor.name.lastName LIKE ?2")
+	@Query("DELETE Actor actor WHERE actor.firstName LIKE ?1 AND actor.lastName LIKE ?2")
 	int deleteActorByName(String firstName, String lastName);
 	
 	

@@ -58,12 +58,12 @@ public interface MovieDao  extends JpaRepository<Movie, Long>,JpaSpecificationEx
 	@Query("SELECT m FROM Movie m WHERE m.year BETWEEN ?1 AND ?2")
 	List<Movie> getAllMovieWithYearBetweeen(Integer from,Integer to);
 	
-	@Query("SELECT m FROM Movie m join m.actors actors WHERE actors.name.firstName LIKE %?1% AND actors.name.lastName LIKE %?2%")
+	@Query("SELECT m FROM Movie m join m.actors actors WHERE actors.firstName LIKE %?1% AND actors.lastName LIKE %?2%")
 	List<Movie> getMovieWithActorIn(String firstName, String lastName);
 	
 	
 	
-	@Query("SELECT m FROM Movie m join m.actors actors WHERE actors.name.firstName LIKE %?1%")
+	@Query("SELECT m FROM Movie m join m.actors actors WHERE actors.firstName LIKE %?1%")
 	List<Movie> getMovieWithActorWithFristNameIn(String firstName);
 	
 	@Query("SELECT m FROM Movie m join m.comments comments")

@@ -18,8 +18,18 @@ public class Human extends BaseEntity{
 
 	private static final long serialVersionUID = 1L;
 	
-	Name name;
+	//Name name;
 	
+	//@ColumnTransformer(read="UPPER(first_name)")
+	@Column
+	private String firstName;
+	
+	@Column
+	private String lastName;
+	
+	@Formula(value = "CONCAT(first_name,\" \",last_name)")
+	private String fullName;
+		
 	@Column
 	private Date birthday;
 	

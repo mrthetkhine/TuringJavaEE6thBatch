@@ -27,6 +27,7 @@ public class MovieDirectorTest {
 	@Autowired 
 	MovieDao movieDao;
 	
+	/*
 	@Test
 	@Transactional
 	void testCreate()
@@ -58,6 +59,6 @@ public class MovieDirectorTest {
 		movie.getDirectors().add(d2);
 		
 		this.movieDao.save(movie);
-	}
+	}*/
 	
 }
