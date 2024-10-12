@@ -1,6 +1,7 @@
 package com.jpaexample.demo.model.dto;
 
 import java.util.List;
+import java.util.Set;
 
 import com.jpaexample.demo.model.entity.MovieDetails;
 
@@ -30,6 +31,6 @@ public class MovieDto {
 	MovieDetailsDto movieDetails;
 	
 	List<CommentDto> comments;
-	List<ActorDto> actors;
+	Set<ActorDto> actors;
 	List<DirectorDto> directors;
 }

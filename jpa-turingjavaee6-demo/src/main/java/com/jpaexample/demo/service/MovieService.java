@@ -8,6 +8,10 @@ import com.jpaexample.demo.model.dto.MovieDto;
 
 public interface MovieService {
 	List<MovieDto> getAllMovie();
+	List<MovieDto> getAllMovieByTitle(String title);
 	MovieDto saveMovie(MovieDto movieDto);
 	Optional<MovieDto> getMovieById(Long id);
+	MovieDto updateMovie(MovieDto movieDto);
+	MovieDto deleteMovieById(Long movieId);
+	MovieDto assignActorToMovie(Long movieId, Long actorId);
 }

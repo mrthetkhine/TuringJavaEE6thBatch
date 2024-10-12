@@ -1,7 +1,10 @@
 package com.jpaexample.demo.model.entity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -14,10 +17,13 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
-@ToString(callSuper=true)
-@Data
+
+@Getter
+@Setter
 @Entity
 public class Actor extends Human{
 
@@ -26,8 +32,19 @@ public class Actor extends Human{
 	@ToString.Exclude
 	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY, 
-				cascade = CascadeType.ALL, 
+			cascade= {
+					CascadeType.MERGE,
+					CascadeType.PERSIST
+			}, 
 				mappedBy = "actors")
-	private List<Movie> movies = new ArrayList<>();
+	private Set<Movie> movies = new HashSet<Movie>();
+
+	public Set<Movie> getMovies() {
+		return movies;
+	}
+
+	public void setMovies(Set<Movie> movies) {
+		this.movies = movies;
+	}
 	
 }

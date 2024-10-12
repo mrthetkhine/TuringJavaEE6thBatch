@@ -1,8 +1,10 @@
 package com.jpaexample.demo.model.entity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
+import java.util.TreeSet;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -16,12 +18,13 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Transient;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 
-@ToString(callSuper=true)
-@Data
-@EqualsAndHashCode(exclude="movieDetails")
+@Getter
+@Setter
 @Entity
 public class Movie extends BaseEntity{
 
@@ -43,7 +46,7 @@ public class Movie extends BaseEntity{
 			mappedBy = "movie", 
 			cascade = CascadeType.ALL,
 			fetch=FetchType.LAZY)
-	MovieDetails movieDetails;
+	private MovieDetails movieDetails;
 
 	@OneToMany(
 			cascade= CascadeType.ALL,
@@ -51,22 +54,32 @@ public class Movie extends BaseEntity{
 			fetch = FetchType.LAZY 
 			)
 	@JoinColumn(name="movie_id")
-	List<Comment> comments = new ArrayList<>();
+	private List<Comment> comments = new ArrayList<>();
 	
 	@ManyToMany(
-			fetch=FetchType.LAZY,
-			cascade=CascadeType.ALL)
+			fetch=FetchType.LAZY
+			,cascade= {
+					CascadeType.MERGE,
+					CascadeType.PERSIST
+			})
 	@JoinTable(name="actor_in_movie",
 			joinColumns = { @JoinColumn(name = "movie_id") },
             inverseJoinColumns = { @JoinColumn(name = "actor_id") })
-	List<Actor> actors=new ArrayList<>();
+	private Set<Actor> actors = new HashSet<>();
 
 	@ManyToMany(
 			fetch=FetchType.LAZY,
-			cascade=CascadeType.ALL
+			cascade= {
+					CascadeType.MERGE,
+					CascadeType.PERSIST
+			}
 			)
 	@JoinTable(name="director_in_movie",
 			joinColumns = { @JoinColumn(name = "movie_id") },
             inverseJoinColumns = { @JoinColumn(name = "director_id") })
-	List<Director> directors=new ArrayList<>();
+	private Set<Director> directors=new HashSet<>();
+
+	
+	
+	
 }

@@ -9,10 +9,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
-@Data
-@ToString//(callSuper=true)
+@Getter
+@Setter
 @Entity
 public class Book  implements Serializable{
 	private static final long serialVersionUID = 1L;

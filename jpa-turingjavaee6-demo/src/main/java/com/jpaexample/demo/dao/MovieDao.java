@@ -22,7 +22,7 @@ public interface MovieDao  extends JpaRepository<Movie, Long>,JpaSpecificationEx
 {
 
 	@Query(value="SELECT * FROM movie WHERE title=?",nativeQuery=true)
-	Movie findMovieWithTitleInNative(String title);
+	List<Movie> findMovieWithTitleInNative(String title);
 	
 	@Query("SELECT m FROM Movie m")
 	List<Movie> getAllMovie();
@@ -43,7 +43,7 @@ public interface MovieDao  extends JpaRepository<Movie, Long>,JpaSpecificationEx
 	List<String> getAllGenere();
 	
 	@Query("SELECT m FROM Movie m WHERE m.title LIKE %?1%")
-	List<Movie> getAllMovieLike(String title);
+	List<Movie> getAllMovieInTitleLike(String title);
 	
 	@Query("SELECT count(m) FROM Movie m "
 			+ "WHERE m.genre = :genre")

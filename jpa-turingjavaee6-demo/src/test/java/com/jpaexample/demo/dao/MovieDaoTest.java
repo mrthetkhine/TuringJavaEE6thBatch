@@ -37,6 +37,7 @@ public class MovieDaoTest {
 	@Autowired
 	MovieDetailsDao movieDetailsDao;
 	
+	/*
 	@Test
 	void insertMovie()
 	{
@@ -55,7 +56,7 @@ public class MovieDaoTest {
 		movieDao.save(movie);
 		
 		
-	}
+	}*/
 	/*
 	@Test
 	@Transactional
@@ -65,9 +66,9 @@ public class MovieDaoTest {
 		Actor actor1 = new Actor();
 		
 		Name actor1Name = new Name();
-		actor1Name.setFirstName("Actor ");
-		actor1Name.setLastName("Three ");
-		actor1.setName(actor1Name);
+	
+		actor1.setFirstName("Actor");
+		actor1.setLastName("Another");
 		
 		actor1.setBirthday(new Date());
 	
@@ -75,11 +76,9 @@ public class MovieDaoTest {
 		//actors.add(actor1);
 		
 		Actor actor2 = new Actor();
+		actor2.setFirstName("Actor ");
+		actor2.setLastName("Four ");
 		
-		Name actor2Name = new Name();
-		actor2Name.setFirstName("Actor ");
-		actor2Name.setLastName("Four ");
-		actor2.setName(actor2Name);
 		actor2.setBirthday(new Date());
 		
 		
@@ -120,6 +119,7 @@ public class MovieDaoTest {
 			log.info("Actor "+actor);
 		}
 	}*/
+	/*
 	@Test
 	@Transactional 
 	void testNativeQuery()
@@ -127,5 +127,17 @@ public class MovieDaoTest {
 		Movie movie = this.movieDao.findMovieWithTitleInNative("Movie 1");
 		log.info("Title "+movie.getTitle());
 		log.info("No of Actors "+movie.getActors().size());
+	}*/
+	
+	@Test
+	@Transactional 
+	void testRelationship()
+	{
+		
+		List<Movie> movies = this.movieDao.findAll();
+		for(Movie movie : movies)
+		{
+			System.err.println("Movie " +movie.getTitle() + " Actor size "+movie.getActors().size());
+		}
 	}
 }

@@ -14,7 +14,7 @@ import com.jpaexample.demo.model.entity.Book;
 import jakarta.transaction.Transactional;
 
 @Repository
-public interface ActorDao extends PagingAndSortingRepository<Actor, Long> {
+public interface ActorDao extends PagingAndSortingRepository<Actor, Long> ,JpaRepository<Actor,Long>{
 
 	@Query("SELECT actor from Actor actor WHERE (actor.firstName,actor.lastName)=(?1,?2)")
 	List<Actor> getActorWithName(String firstName, String lastName);
