@@ -4,26 +4,24 @@
   lang="en"
   xmlns:th="http://www.thymeleaf.org" 
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
- >
- <head>
-	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.2/css/bootstrap.min.css} " />
- </head>
+  layout:decorate="~{/fragments/layout.html}">
 <body>
-	<div class="container">
-		<h1>logout </h1>
-	</div>
-	
-	<div th:if="${param.error}">
-	            Invalid username and password.
-	 </div>
-    <div th:if="${param.logout}">
-        You have been logged out.
-    </div>
-	<div class="container">
-		<form th:action="@{/logout}" method="post">
-            <button type="submit" class="btn btn-primary">Sign Out</button>
+	<section layout:fragment="content">
+		<div class="container">
+			<h1>logout </h1>
+		</div>
+		
+		<div th:if="${param.error}">
+		            Invalid username and password.
+		 </div>
+	    <div th:if="${param.logout}">
+	        You have been logged out.
+	    </div>
+		<div class="container">
+			<form th:action="@{/logout}" method="post">
+	            <button type="submit" class="btn btn-primary">Sign Out</button>
         </form>
 	</div>
-    
+    </section>	
 </body>
 </html>

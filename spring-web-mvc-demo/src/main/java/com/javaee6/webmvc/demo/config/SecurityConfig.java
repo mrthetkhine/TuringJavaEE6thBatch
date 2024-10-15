@@ -2,6 +2,7 @@ package com.javaee6.webmvc.demo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -17,14 +18,18 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		log.info("securityFilterChain");
 		http
 			.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/", "/home","/webjars/**").permitAll()
-				.anyRequest().authenticated()
+					.requestMatchers("/", "/home","/webjars/**").permitAll()
+					.requestMatchers("/register").hasRole("ADMIN")          
+					.anyRequest().authenticated()
+					
+				
 			)
 			.formLogin((form) -> form
 				.loginPage("/login")

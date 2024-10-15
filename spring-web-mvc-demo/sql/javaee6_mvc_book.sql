@@ -53,7 +53,7 @@ CREATE TABLE `role` (
   `role` varchar(45) DEFAULT NULL,
   `user_id` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -62,7 +62,7 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (1,'USER','1');
+INSERT INTO `role` VALUES (1,'ROLE_USER','1'),(2,'ROLE_ADMIN','2'),(3,'ROLE_USER','3');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -78,7 +78,7 @@ CREATE TABLE `user` (
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,7 +87,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'user','$2a$10$Ndixu5H4SgIHAUBX5wU6guQeHNeSLgi1soOJGG.V4UPzNnUpB5T8u');
+INSERT INTO `user` VALUES (1,'user','$2a$10$Ndixu5H4SgIHAUBX5wU6guQeHNeSLgi1soOJGG.V4UPzNnUpB5T8u'),(2,'admin','$2a$10$Eba2RUfIg6.7//7ltG5HgO0uDa.8LICy3.y1Ibl0RNxThk1SDEmUy'),(3,'user1','$2a$10$U1e9pyrRgWzu6FNniHhPau3xy1PLlS7mT/fZ3aYWdNma9W92VQncO');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -100,4 +100,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-13 20:31:29
+-- Dump completed on 2024-10-15 21:20:15

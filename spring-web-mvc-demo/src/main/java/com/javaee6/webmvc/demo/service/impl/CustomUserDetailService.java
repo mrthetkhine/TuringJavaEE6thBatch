@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.javaee6.webmvc.demo.config.Config;
 import com.javaee6.webmvc.demo.dao.UserRepository;
+import com.javaee6.webmvc.demo.model.Role;
 import com.javaee6.webmvc.demo.model.User;
 
 import jakarta.transaction.Transactional;
@@ -36,7 +37,12 @@ public class CustomUserDetailService  implements UserDetailsService{
         }
         return createSpringSecurityUser(user);
 	}
+	@Transactional
 	private org.springframework.security.core.userdetails.User createSpringSecurityUser(User user) {
+		for(Role role : user.getRoles())
+		{
+			log.info("Role for "+ user.getUsername()+" Role "+role.getRole());
+		}
         List<GrantedAuthority> grantedAuthorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getRole()))
                 .collect(Collectors.toList());

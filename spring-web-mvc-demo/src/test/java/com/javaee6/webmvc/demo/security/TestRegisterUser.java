@@ -28,11 +28,12 @@ public class TestRegisterUser {
 	public void addUser()
 	{
 		User user = new User();
-		user.setUsername("user");
-		user.setPassword(securityUtil.getHash("user"));
+		user.setUsername("admin");
+		user.setPassword(securityUtil.getHash("admin"));
 		
 		Role role1 = new Role();
-		role1.setRole("USER");
+		//role1.setRole("ROLE_ADMIN");
+		role1.setRole("ROLE_USER");
 		
 		user.getRoles().add(role1);
 		

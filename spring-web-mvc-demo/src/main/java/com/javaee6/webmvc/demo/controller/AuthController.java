@@ -25,4 +25,10 @@ public class AuthController {
 		log.info("logout controller");
 		return "logout";
 	}
+	@GetMapping("/403")
+	String accessDenied()
+	{
+		log.info("accessDenied controller");
+		return "403";
+	}
 }
