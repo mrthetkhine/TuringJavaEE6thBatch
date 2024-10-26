@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
+import reactor.test.StepVerifier;
 
 @Slf4j
 public class MapTest {
@@ -18,7 +19,13 @@ public class MapTest {
 			.subscribe(data->log.info("data "+data));
 		
 		Flux<String> items = Flux.just("Apple","Orange","Banana");
-		items.map(item->item.length())//Flux<Integer>
-			.subscribe(len->log.info("length "+len));
+		Flux<Integer> lengths = items.map(item->item.length());//Flux<Integer>
+			//.subscribe(len->log.info("length "+len));
+		
+		StepVerifier.create(lengths)
+					.expectNext(5)
+					.expectNext(6)
+					.expectNext(6)
+					.verifyComplete();
 	}
 }
