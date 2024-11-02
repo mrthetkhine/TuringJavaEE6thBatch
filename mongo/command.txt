@@ -124,3 +124,239 @@ db.inventory.find( { "dim_cm.1": { $gt: 25 } } )
 //size
 db.inventory.find( { "tags": { $size: 3 } } )
 
+db.inventory.insertMany( [
+   { item: "journal", instock: [ { warehouse: "A", qty: 5 }, { warehouse: "C", qty: 15 } ] },
+   { item: "notebook", instock: [ { warehouse: "C", qty: 5 } ] },
+   { item: "paper", instock: [ { warehouse: "A", qty: 60 }, { warehouse: "B", qty: 15 } ] },
+   { item: "planner", instock: [ { warehouse: "A", qty: 40 }, { warehouse: "B", qty: 5 } ] },
+   { item: "postcard", instock: [ { warehouse: "B", qty: 15 }, { warehouse: "C", qty: 35 } ] }
+]);
+
+db.inventory.find( { 'instock.qty': { $lte: 20 } } )
+//order 
+db.inventory.find( { "instock": { qty: 5, warehouse: "A" } } )
+
+db.inventory.find( { "instock": {  warehouse: "A",qty: 5 } } )
+
+db.inventory.find( { "instock": { $elemMatch: { qty: 5, warehouse: "A" } } } )
+
+db.inventory.insertMany( [
+  { item: "journal", status: "A", size: { h: 14, w: 21, uom: "cm" }, instock: [ { warehouse: "A", qty: 5 } ] },
+  { item: "notebook", status: "A",  size: { h: 8.5, w: 11, uom: "in" }, instock: [ { warehouse: "C", qty: 5 } ] },
+  { item: "paper", status: "D", size: { h: 8.5, w: 11, uom: "in" }, instock: [ { warehouse: "A", qty: 60 } ] },
+  { item: "planner", status: "D", size: { h: 22.85, w: 30, uom: "cm" }, instock: [ { warehouse: "A", qty: 40 } ] },
+  { item: "postcard", status: "A", size: { h: 10, w: 15.25, uom: "cm" }, instock: [ { warehouse: "B", qty: 15 }, { warehouse: "C", qty: 35 } ] }
+]);
+
+//project
+db.inventory.find( { status: "A" }, { item: 1, status: 1 } )
+
+db.inventory.find( { status: "A" }, { item: 1, status: 1 ,_id:0} )
+
+db.inventory.find( { status: "A" }, { status: 0, instock: 0 } )
+
+db.students.insertMany( [
+   { _id: 1, test1: 95, test2: 92, test3: 90, modified: new Date("01/05/2020") },
+   { _id: 2, test1: 98, test2: 100, test3: 102, modified: new Date("01/05/2020") },
+   { _id: 3, test1: 95, test2: 110, modified: new Date("01/04/2020") }
+] )
+
+db.students.updateOne( { _id: 3 }, [ { $set: { "test3": 98, modified: "$$NOW"} } ] )
+db.students2.insertMany( [
+   { "_id" : 1, quiz1: 8, test2: 100, quiz2: 9, modified: new Date("01/05/2020") },
+   { "_id" : 2, quiz2: 5, test1: 80, test2: 89, modified: new Date("01/05/2020") },
+] )
+
+db.students2.updateMany( {},
+  [
+    { $replaceRoot: { newRoot:
+       { $mergeObjects: [ { quiz1: 0, quiz2: 0, test1: 0, test2: 0 }, "$$ROOT" ] }
+        } 
+    },
+    { $set: { modified: "$$NOW"}  }
+  ]
+)
+//join
+db.actors.insertOne({
+  
+  "firstName": "Leonardo",
+  "lastName": "Decaprio"
+})
+db.actors.insertOne({
+ 
+  "firstName": "Actor",
+  "lastName": "Two"
+})
+
+db.actors.insertOne({
+ 
+  "firstName": "Actor",
+  "lastName": "Three"
+})
+//actor 1
+67261a24b87e4e06c0b564ac
+
+//actor 2
+67261a46b87e4e06c0b564ad
+
+//actor 3
+67261b5cb87e4e06c0b564b0
+
+db.movies.insertOne({
+"title": "Movie 1",
+  "year": 2010,
+  "genre": "Sci-Fi",
+ 
+  "actors": [
+    "67261a24b87e4e06c0b564ac",
+    "67261a46b87e4e06c0b564ad"
+  ]
+})
+
+db.movies.insertOne({
+"title": "Movie 2",
+  "year": 2010,
+  "genre": "Sci-Fi",
+ 
+  "actors": [
+    "67261a46b87e4e06c0b564ad"
+  ]
+})
+
+
+db.movies.insertOne({
+"title": "Movie 3",
+  "year": 2010,
+  "genre": "Sci-Fi",
+ 
+  "actors": [
+    "67261a24b87e4e06c0b564ac",
+    "67261b5cb87e4e06c0b564b0"
+  ]
+})
+
+db.movies.insertOne({
+  
+  "title": "Movie 4",
+  "year": 2010,
+  "genre": "Sci-Fi",
+  "actor": ObjectId("67261b5cb87e4e06c0b564b0")
+  
+})
+
+db.movies.insertOne({
+  "title": "Movie 6",
+  "year": 2010,
+  "genre": "Sci-Fi",
+  "actor": ObjectId("67261b5cb87e4e06c0b564b0")
+})
+
+
+db.movies.aggregate()
+
+//one to one
+db.movies.aggregate([
+    { 
+        "$lookup": {
+            "from": "actors",
+            "localField": "actor",
+            "foreignField": "_id",
+            "as": "joined_actors"
+        } 
+    }
+]);
+
+db.movies.aggregate([
+    {
+        $unwind:"$actor_id"
+    },
+    { $lookup:
+      {
+        from: 'actors',
+        localField: "actor_id",
+        foreignField: '_id',
+        as: 'joined_actors'
+      }
+    },
+     {
+        $unwind:"$joined_actors"
+     },
+    { 
+        "$group": {
+        "_id": "$_id",
+        "joined_actors": { "$push": "$joined_actors" },
+        "doc":{"$first":"$$ROOT"}
+        }
+    },
+    {   "$replaceRoot":{
+            "newRoot":{ $mergeObjects: [ '$doc',{ actors: '$joined_actors' }] },
+        }
+    }
+ ])
+
+ db.movies.aggregate([
+    {
+        $unwind:"$actors"
+    },
+    { 
+        $lookup:
+        {
+            from: 'actors',
+            localField: "actors",
+            foreignField: '_id',
+            as: 'joined_actors'
+        }
+    },
+])
+
+
+//String Object
+db.movies.aggregate([
+    {
+        $addFields: {
+            "movie_actors": {
+                $map:{
+                    input: "$actors",
+                    as: "actor",
+                    in: { $toObjectId: "$$actor" }
+                }
+                
+            }
+        }
+    },
+    {
+        $unwind:"$movie_actors"
+    },
+    { 
+        $lookup:
+        {
+            from: 'actors',
+            localField: "movie_actors",
+            foreignField: '_id',
+            as: 'joined_actors'
+        }
+    },
+    { 
+        "$group": {
+            "_id": "$_id",
+            "joined_actors":{ 
+                                "$push":{ $arrayElemAt: [ "$joined_actors",0] }
+                            },
+            "doc":{"$first":"$$ROOT"}
+        }
+    },
+     {   "$replaceRoot":{
+            "newRoot":{ $mergeObjects: [ '$doc',{ actors: '$joined_actors' }] },
+        }
+    },
+    { $unset: "joined_actors" },
+    { 
+        "$match": {
+            "actors": {
+                $elemMatch:{
+                    "firstName":"Leonardo"
+                }
+            }
+        } 
+    },
+])
