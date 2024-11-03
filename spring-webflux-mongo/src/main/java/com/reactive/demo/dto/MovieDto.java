@@ -1,13 +1,10 @@
-package com.reactive.demo.model;
+package com.reactive.demo.dto;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 
 
 import jakarta.validation.constraints.NotBlank;
@@ -15,20 +12,14 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Document(collection = "movies")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Movie {
-	
-	@Id
-    private String id;
+public class MovieDto {
+	private String id;
 
-    @NotBlank
+    @NotBlank(message="movie name must not be blank")
     @Size(max = 140)
     private String name;
     
@@ -41,13 +32,11 @@ public class Movie {
     //@NotNull
     private Date createdAt;
     
+    MovieDetailsDto details;
+    
     ArrayList<String> genres;
     
-    //Embedded model
-    MovieDetails details;
-    
-    //Reference model
-    @DBRef
-    private List<Actor> actors;
-    
+    private List<ActorDto> actors;
+   
+
 }

@@ -1,5 +1,7 @@
 package com.reactive.demo.repository;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +14,7 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @SpringBootTest
-@Rollback(false)
+//@Rollback(false)
 public class ActorRepositoryTest {
 
 	@Autowired
@@ -22,13 +24,17 @@ public class ActorRepositoryTest {
 	public void insertActorTest()
 	{
 		Actor actor = new Actor();
-		actor.setFirstName("Kate");
-		actor.setLastName("Winslect");
+		actor.setFirstName("Actor");
+		actor.setLastName("Five");
 		
-		this.actorRepository.save(actor).subscribe(result->{
-			log.info("Actor saved "+result.getId());
-			//Mono<Actor> actorResult = this.actorRepository.findById(result.getId());
-		});
+		this.actorRepository.save(actor)
+							.flatMap(savedActor->this.actorRepository.findById(savedActor.getId()))
+							.subscribe(result->{
+								log.info("Result "+result);
+								assertTrue(result!=null);
+							});
+									
+							
 
 		//Mono<Actor> result = this.actorRepository.findById(actor.getId());
 		WaitUtil.sleep(2000);
