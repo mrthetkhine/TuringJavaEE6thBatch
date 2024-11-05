@@ -1,4 +1,4 @@
-package com.reactive.demo.controller.service.impl;
+package com.reactive.demo.service.impl;
 
 import java.util.List;
 
@@ -7,7 +7,6 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.reactive.demo.controller.service.MovieService;
 import com.reactive.demo.dto.ActorDto;
 import com.reactive.demo.dto.MovieDetailsDto;
 import com.reactive.demo.dto.MovieDto;
@@ -16,6 +15,7 @@ import com.reactive.demo.model.Actor;
 import com.reactive.demo.model.MovieDetails;
 import com.reactive.demo.repository.ActorRepository;
 import com.reactive.demo.repository.MovieRepository;
+import com.reactive.demo.service.MovieService;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -36,6 +36,14 @@ public class MovieServiceImpl implements MovieService{
 					.findAll()
 					//.map(m->entityToDto(m));
 					.map(this::entityToDto);
+	}
+	@Override
+	public Flux<MovieDto> getAllMovieWithYearGt(Long year) {
+		
+		return this.movieRepository
+				.findByYear(year)
+				//.map(m->entityToDto(m));
+				.map(this::entityToDto);
 	}
 	@Override
 	public Mono<MovieDto> getMovieById(String movieId) {
@@ -91,6 +99,39 @@ public class MovieServiceImpl implements MovieService{
 						return this.saveMovie(movieDto);
 					});
 	}
+	@Override
+	public Mono<MovieDto> deleteMovieById(String movieId) {
+		return this.movieRepository.findById(movieId)
+				.switchIfEmpty(Mono.error(new Exception("Movie with id "+movieId+" Not found")))
+				.flatMap(movie->{
+					return this.movieRepository.deleteById(movieId)
+							   .thenReturn(this.entityToDto(movie));
+					
+				});
+	}
+	@Override
+	public Mono<MovieDto> assignActorToMovie(String movieId, String actorId) {
+		
+		return this.movieRepository.findById(movieId)
+					.switchIfEmpty(Mono.error(new Exception("Movie with id "+movieId+" Not found")))
+					.flatMap(movie->{
+						return this.actorRepository.findById(actorId)
+									.switchIfEmpty(Mono.error(new Exception("Actor with id "+actorId+" Not found")))
+									.flatMap(actor->{
+										movie.getActors().add(actor);
+										return this.movieRepository.save(movie);
+									});
+					})
+					.map(this::entityToDto);
+	}
+	@Override
+	public Flux<MovieDto> getllMovieByDirector(String director) {
+		return this.movieRepository
+				.getMovieByDirector(director)
+				//.map(m->entityToDto(m));
+				.map(this::entityToDto);
+	}
+	
 	
 
 }

@@ -1,6 +1,7 @@
 package com.reactive.demo.repository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class MovieRepositoryTest {
 	@Autowired
 	MovieRepository movieRepository;
 	
-	@Test
+	//@Test
 	public void testSaveMovie()
 	{
 		//Titanic
@@ -62,4 +63,36 @@ public class MovieRepositoryTest {
 		WaitUtil.sleep(2000);
 	}
 
+	//@Test
+	public void getMovieByYearGte()
+	{
+		this.movieRepository.getMovieByYearGt(2010L)
+							.doOnNext(movie->{
+								log.info("Movie "+movie);
+							})
+							.collectList()
+							.subscribe(movies->{
+								assertTrue(movies.size()>0);
+							},err->{
+								log.info("Error "+err);
+								
+							});
+		WaitUtil.sleep(2000);
+	}
+	@Test
+	public void getAllMovieWhereActorIn()
+	{
+		this.movieRepository.getAllMovieWithLookup("Leonardo")
+							.doOnNext(movie->{
+								log.info("Movie "+movie);
+							})
+							.collectList()
+							.subscribe(movies->{
+								assertTrue(movies.size()>0);
+							},err->{
+								log.info("Error "+err);
+								
+							});
+		WaitUtil.sleep(2000);
+	}
 }

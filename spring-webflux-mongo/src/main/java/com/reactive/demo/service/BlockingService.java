@@ -1,4 +1,4 @@
-package com.reactive.demo.controller.service;
+package com.reactive.demo.service;
 
 import org.springframework.stereotype.Service;
 
