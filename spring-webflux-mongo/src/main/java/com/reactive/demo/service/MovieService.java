@@ -16,4 +16,6 @@ public interface MovieService {
 	Mono<MovieDto> updateMovieById(String movieId,MovieDto movieDto);
 	Mono<MovieDto> deleteMovieById(String movieId);
 	Mono<MovieDto> assignActorToMovie(String movieId,String actorId);
+	
+	Flux<MovieDto> getMovieWithAverageRatingGTE(int averageRating);
 }

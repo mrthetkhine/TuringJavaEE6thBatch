@@ -12,6 +12,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RestResponse {
+	String code;
+	String message;
 	Object error;
 	Object data;
+	
+	
 }

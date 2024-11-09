@@ -5,6 +5,7 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 
 import com.reactive.demo.dto.ActorDto;
@@ -13,8 +14,10 @@ import com.reactive.demo.dto.MovieDto;
 import com.reactive.demo.model.Movie;
 import com.reactive.demo.model.Actor;
 import com.reactive.demo.model.MovieDetails;
+import com.reactive.demo.model.Review;
 import com.reactive.demo.repository.ActorRepository;
 import com.reactive.demo.repository.MovieRepository;
+import com.reactive.demo.repository.ReviewRepository;
 import com.reactive.demo.service.MovieService;
 
 import reactor.core.publisher.Flux;
@@ -30,6 +33,10 @@ public class MovieServiceImpl implements MovieService{
 	
 	@Autowired
 	ActorRepository actorRepository;
+	
+	@Autowired
+	ReviewRepository reviewRepository;
+	
 	@Override
 	public Flux<MovieDto> getAllMovie() {
 		return this.movieRepository
@@ -130,6 +137,27 @@ public class MovieServiceImpl implements MovieService{
 				.getMovieByDirector(director)
 				//.map(m->entityToDto(m));
 				.map(this::entityToDto);
+	}
+	@Override
+	public Flux<MovieDto> getMovieWithAverageRatingGTE(int averageRating) {
+		return this.reviewRepository
+		.findAll()
+		.groupBy(review->review.getMovie().getId())
+		.flatMap(group->group.collectList())
+		.map(reviews->getAverageRating(reviews))
+		.filter(pair->pair.getSecond()>=averageRating)
+		.map(pair->pair.getFirst())
+		.map(this::entityToDto);
+	}
+	private Pair<Movie, Double> getAverageRating(List<Review> reviews) {
+		double sum = 0;
+		for(Review r: reviews)
+		{
+			sum += r.getRating();
+		}
+		Double average= new Double(sum/ reviews.size());
+		
+		return Pair.of(reviews.get(0).getMovie(),average);
 	}
 	
 	
