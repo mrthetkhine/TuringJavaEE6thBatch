@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.reactive.demo.dto.MovieDto;
 import com.reactive.demo.dto.RestResponse;
+import com.reactive.demo.dto.ReviewDto;
 import com.reactive.demo.service.MovieService;
 import com.reactive.demo.service.ReviewService;
 
@@ -71,19 +72,48 @@ public class MovieController {
 	Mono<ResponseEntity<RestResponse>> deleteMovieById(@PathVariable String movieId)
 	{
 		return this.movieService.deleteMovieById(movieId)
+								
 								.flatMap(dto->succesResponse(HttpStatus.OK,"Movie deleted successfully",dto))
 								.onErrorResume(err->errorResponse(HttpStatus.BAD_REQUEST,err.getMessage(),err.getLocalizedMessage()));
 							
 	}
-	/*
+	
 	@GetMapping("/{movieId}/reviews")
 	Mono<ResponseEntity<RestResponse>> getReviewsOfMovieId(@PathVariable String movieId)
 	{
 		return this.reviewService.getReviewByMovie(movieId)
-								.flatMap(movieDto->succesResponse(HttpStatus.OK,"Movie found successfully",movieDto))
+								.collectList()	
+								.flatMap(reviewDtos->succesResponse(HttpStatus.OK,"Review found successfully",reviewDtos))
 								.onErrorResume(err->errorResponse(HttpStatus.BAD_REQUEST,err.getMessage(),err.getLocalizedMessage()));
 							
-	}*/
+	}
+	@PostMapping("/{movieId}/reviews")
+	Mono<ResponseEntity<RestResponse>> saveReview(@PathVariable String movieId,@Valid @RequestBody ReviewDto reviewDto)
+	{
+		reviewDto.setMovieId(movieId);
+		return this.reviewService.saveReviewForMovie(reviewDto)
+								.flatMap(dto->succesResponse(HttpStatus.OK,"Review successfully saved",dto))
+								.onErrorResume(err->errorResponse(HttpStatus.BAD_REQUEST,err.getMessage(),err.getLocalizedMessage()));
+							
+	}
+	@PutMapping("/reviews/{reviewId}")
+	Mono<ResponseEntity<RestResponse>> updateReivew(@PathVariable String reviewId,@Valid @RequestBody ReviewDto reviewDto)
+	{
+		reviewDto.setId(reviewId);
+		return this.reviewService.updateReview(reviewDto)
+								.flatMap(dto->succesResponse(HttpStatus.OK,"Review successfully updated",dto))
+								.onErrorResume(err->errorResponse(HttpStatus.BAD_REQUEST,err.getMessage(),err.getLocalizedMessage()));
+							
+	}
+	@DeleteMapping("/reviews/{reviewId}")
+	Mono<ResponseEntity<RestResponse>> deleteReview(@PathVariable String reviewId)
+	{
+		
+		return this.reviewService.deleteReviewById(reviewId)
+								.flatMap(dto->succesResponse(HttpStatus.OK,"Review successfully updated",dto))
+								.onErrorResume(err->errorResponse(HttpStatus.BAD_REQUEST,err.getMessage(),err.getLocalizedMessage()));
+							
+	}
 	Mono<ResponseEntity<RestResponse>> succesResponse(HttpStatus statusCode, String message, Object data)
 	{
 		RestResponse response =new RestResponse();
