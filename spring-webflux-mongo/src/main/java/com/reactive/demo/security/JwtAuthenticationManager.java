@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 
+@Slf4j
 public class JwtAuthenticationManager implements ReactiveAuthenticationManager {
 
     private final JwtService jwtService;
@@ -32,6 +34,7 @@ public class JwtAuthenticationManager implements ReactiveAuthenticationManager {
 
     @Override
     public Mono<Authentication> authenticate(Authentication authentication) {
+    	log.info("Authenticated ");
         return Mono.just(authentication)
                 .cast(JwtToken.class)
                 .filter(jwtToken -> jwtService.isTokenValid(jwtToken.getToken()))

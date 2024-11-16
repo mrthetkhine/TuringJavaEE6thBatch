@@ -1,0 +1,64 @@
+[{
+  "_id": {
+    "$oid": "67262e9b07db71315210f56b"
+  },
+  "firstName": "Leonardo",
+  "lastName": "Decapiro",
+  "_class": "com.reactive.demo.model.Actor"
+},
+{
+  "_id": {
+    "$oid": "67262f32af73e55bebab3ec1"
+  },
+  "firstName": "Kate",
+  "lastName": "Winslect",
+  "_class": "com.reactive.demo.model.Actor"
+},
+{
+  "_id": {
+    "$oid": "67276770298d4c2d81ad9704"
+  },
+  "firstName": "Actor",
+  "lastName": "Three",
+  "_class": "com.reactive.demo.model.Actor"
+},
+{
+  "_id": {
+    "$oid": "6727679b80d4ab75b520eb63"
+  },
+  "firstName": "Actor",
+  "lastName": "Four",
+  "_class": "com.reactive.demo.model.Actor"
+},
+{
+  "_id": {
+    "$oid": "6727683cb4ee274504f8754a"
+  },
+  "firstName": "Actor",
+  "lastName": "Five",
+  "_class": "com.reactive.demo.model.Actor"
+},
+{
+  "_id": {
+    "$oid": "67277c77109fcd18f8eb9ef0"
+  },
+  "firstName": "Actor",
+  "lastName": "of movie 3",
+  "_class": "com.reactive.demo.model.Actor"
+},
+{
+  "_id": {
+    "$oid": "65a285a8b9314f6b792a95aa"
+  },
+  "firstName": "Actor 1 for movie 5 updated",
+  "lastName": "Decaprio",
+  "_class": "com.reactive.demo.model.Actor"
+},
+{
+  "_id": {
+    "$oid": "65a285a8b9314f6b792a95ab"
+  },
+  "firstName": "Kate",
+  "lastName": "Winslect",
+  "_class": "com.reactive.demo.model.Actor"
+}]

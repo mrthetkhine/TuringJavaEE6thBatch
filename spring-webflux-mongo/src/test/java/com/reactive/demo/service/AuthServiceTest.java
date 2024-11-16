@@ -25,13 +25,13 @@ public class AuthServiceTest {
 	public void testRegsiterUser()
 	{
 		User user = new User();
-		user.setUsername("admin");
+		user.setUsername("user");
 		user.setEmail("admin@gmail.com");
-		user.setPassword("admin");
+		user.setPassword("user");
 		List<Role> roles= new ArrayList<Role>();
 		
 		Role role = new Role();
-		role.setRole("ROLE_ADMIN");
+		role.setRole("ROLE_USER");
 		roles.add(role);
 		user.setRoles(roles);
 		
@@ -45,14 +45,14 @@ public class AuthServiceTest {
 	public void testLogin()
 	{
 		User user = new User();
-		user.setUsername("admin");
+		user.setUsername("user");
 		user.setEmail("admin@gmail.com");
-		user.setPassword("admin");
-		user.setPassword("admin");
+		user.setPassword("user");
+		
 		List<Role> roles= new ArrayList<Role>();
 		
 		Role role = new Role();
-		role.setRole("ROLE_ADMIN");
+		role.setRole("ROLE_USER");
 		roles.add(role);
 		user.setRoles(roles);
 		

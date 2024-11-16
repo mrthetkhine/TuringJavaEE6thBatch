@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.reactive.demo.common.ResponseUtil;
 import com.reactive.demo.dto.MovieDto;
 import com.reactive.demo.dto.RestResponse;
 import com.reactive.demo.dto.ReviewDto;
@@ -30,6 +31,9 @@ import reactor.core.publisher.Mono;
 public class MovieController {
 	
 	@Autowired
+	ResponseUtil responseUtil;
+	
+	@Autowired
 	MovieService movieService;
 	
 	@Autowired
@@ -40,15 +44,15 @@ public class MovieController {
 	{
 		return this.movieService.getAllMovie()
 								.collectList()
-								.flatMap(movies->succesResponse(HttpStatus.OK,"Get all movies ok",movies));
+								.flatMap(movies->responseUtil.succesResponse(HttpStatus.OK,"Get all movies ok",movies));
 							
 	}
 	@GetMapping("/{movieId}")
 	Mono<ResponseEntity<RestResponse>> getMovieById(@PathVariable String movieId)
 	{
 		return this.movieService.getMovieById(movieId)
-								.flatMap(movieDto->succesResponse(HttpStatus.OK,"Movie found successfully",movieDto))
-								.onErrorResume(err->errorResponse(HttpStatus.BAD_REQUEST,err.getMessage(),err.getLocalizedMessage()));
+								.flatMap(movieDto->responseUtil.succesResponse(HttpStatus.OK,"Movie found successfully",movieDto))
+								.onErrorResume(err->responseUtil.errorResponse(HttpStatus.BAD_REQUEST,err.getMessage(),err.getLocalizedMessage()));
 							
 	}
 	
@@ -56,15 +60,15 @@ public class MovieController {
 	Mono<ResponseEntity<RestResponse>> saveMovie(@Valid @RequestBody MovieDto dto)
 	{
 		return this.movieService.saveMovie(dto)
-								.flatMap(movieDto->succesResponse(HttpStatus.CREATED,"Movie saved successfully",movieDto));							
+								.flatMap(movieDto->responseUtil.succesResponse(HttpStatus.CREATED,"Movie saved successfully",movieDto));							
 		
 	}
 	@PutMapping("/{movieId}")
 	Mono<ResponseEntity<RestResponse>> updateMovieById(@PathVariable String movieId, @Valid @RequestBody MovieDto movieDto)
 	{
 		return this.movieService.updateMovieById(movieId, movieDto)
-								.flatMap(dto->succesResponse(HttpStatus.OK,"Movie update successfully",dto))
-								.onErrorResume(err->errorResponse(HttpStatus.BAD_REQUEST,err.getMessage(),err.getLocalizedMessage()));
+								.flatMap(dto->responseUtil.succesResponse(HttpStatus.OK,"Movie update successfully",dto))
+								.onErrorResume(err->responseUtil.errorResponse(HttpStatus.BAD_REQUEST,err.getMessage(),err.getLocalizedMessage()));
 							
 	}
 	
@@ -73,8 +77,8 @@ public class MovieController {
 	{
 		return this.movieService.deleteMovieById(movieId)
 								
-								.flatMap(dto->succesResponse(HttpStatus.OK,"Movie deleted successfully",dto))
-								.onErrorResume(err->errorResponse(HttpStatus.BAD_REQUEST,err.getMessage(),err.getLocalizedMessage()));
+								.flatMap(dto->responseUtil.succesResponse(HttpStatus.OK,"Movie deleted successfully",dto))
+								.onErrorResume(err->responseUtil.errorResponse(HttpStatus.BAD_REQUEST,err.getMessage(),err.getLocalizedMessage()));
 							
 	}
 	
@@ -83,8 +87,8 @@ public class MovieController {
 	{
 		return this.reviewService.getReviewByMovie(movieId)
 								.collectList()	
-								.flatMap(reviewDtos->succesResponse(HttpStatus.OK,"Review found successfully",reviewDtos))
-								.onErrorResume(err->errorResponse(HttpStatus.BAD_REQUEST,err.getMessage(),err.getLocalizedMessage()));
+								.flatMap(reviewDtos->responseUtil.succesResponse(HttpStatus.OK,"Review found successfully",reviewDtos))
+								.onErrorResume(err->responseUtil.errorResponse(HttpStatus.BAD_REQUEST,err.getMessage(),err.getLocalizedMessage()));
 							
 	}
 	@PostMapping("/{movieId}/reviews")
@@ -92,8 +96,8 @@ public class MovieController {
 	{
 		reviewDto.setMovieId(movieId);
 		return this.reviewService.saveReviewForMovie(reviewDto)
-								.flatMap(dto->succesResponse(HttpStatus.OK,"Review successfully saved",dto))
-								.onErrorResume(err->errorResponse(HttpStatus.BAD_REQUEST,err.getMessage(),err.getLocalizedMessage()));
+								.flatMap(dto->responseUtil.succesResponse(HttpStatus.OK,"Review successfully saved",dto))
+								.onErrorResume(err->responseUtil.errorResponse(HttpStatus.BAD_REQUEST,err.getMessage(),err.getLocalizedMessage()));
 							
 	}
 	@PutMapping("/reviews/{reviewId}")
@@ -101,8 +105,8 @@ public class MovieController {
 	{
 		reviewDto.setId(reviewId);
 		return this.reviewService.updateReview(reviewDto)
-								.flatMap(dto->succesResponse(HttpStatus.OK,"Review successfully updated",dto))
-								.onErrorResume(err->errorResponse(HttpStatus.BAD_REQUEST,err.getMessage(),err.getLocalizedMessage()));
+								.flatMap(dto->responseUtil.succesResponse(HttpStatus.OK,"Review successfully updated",dto))
+								.onErrorResume(err->responseUtil.errorResponse(HttpStatus.BAD_REQUEST,err.getMessage(),err.getLocalizedMessage()));
 							
 	}
 	@DeleteMapping("/reviews/{reviewId}")
@@ -110,28 +114,9 @@ public class MovieController {
 	{
 		
 		return this.reviewService.deleteReviewById(reviewId)
-								.flatMap(dto->succesResponse(HttpStatus.OK,"Review successfully updated",dto))
-								.onErrorResume(err->errorResponse(HttpStatus.BAD_REQUEST,err.getMessage(),err.getLocalizedMessage()));
+								.flatMap(dto->responseUtil.succesResponse(HttpStatus.OK,"Review successfully updated",dto))
+								.onErrorResume(err->responseUtil.errorResponse(HttpStatus.BAD_REQUEST,err.getMessage(),err.getLocalizedMessage()));
 							
 	}
-	Mono<ResponseEntity<RestResponse>> succesResponse(HttpStatus statusCode, String message, Object data)
-	{
-		RestResponse response =new RestResponse();
-		response.setMessage(message);
-		response.setData(data);
-		ResponseEntity re = ResponseEntity.status(statusCode)
-								.body(response);
-		return Mono.just(re);
-		
-	}
-	Mono<ResponseEntity<RestResponse>> errorResponse(HttpStatus statusCode, String message, Object error)
-	{
-		RestResponse response =new RestResponse();
-		response.setMessage(message);
-		response.setError(error);
-		ResponseEntity re = ResponseEntity.status(statusCode)
-								.body(response);
-		return Mono.just(re);
-		
-	}
+	
 }

@@ -1,0 +1,118 @@
+[{
+  "_id": {
+    "$oid": "67276be7973bc74a9cdcd915"
+  },
+  "name": "Titanic",
+  "director": "Director of Titanic",
+  "genres": [
+    "Drama",
+    "History"
+  ],
+  "details": {},
+  "actors": [
+    {
+      "$ref": "actors",
+      "$id": {
+        "$oid": "67262e9b07db71315210f56b"
+      }
+    },
+    {
+      "$ref": "actors",
+      "$id": {
+        "$oid": "67262f32af73e55bebab3ec1"
+      }
+    }
+  ],
+  "_class": "com.reactive.demo.model.Movie",
+  "year": 2010
+},
+{
+  "_id": {
+    "$oid": "67276c840bf29e454c130135"
+  },
+  "name": "Inception",
+  "director": "Director of Inception",
+  "genres": [
+    "Drama",
+    "History"
+  ],
+  "details": {
+    "details": "This is Inception movie"
+  },
+  "actors": [
+    {
+      "$ref": "actors",
+      "$id": {
+        "$oid": "67262e9b07db71315210f56b"
+      }
+    }
+  ],
+  "_class": "com.reactive.demo.model.Movie",
+  "year": 2015
+},
+{
+  "_id": {
+    "$oid": "67277c77109fcd18f8eb9ef1"
+  },
+  "name": "Movie 3",
+  "director": "Movie 3 Director",
+  "details": {
+    "details": "Movie 3 details"
+  },
+  "actors": [
+    {
+      "$ref": "actors",
+      "$id": {
+        "$oid": "67277c77109fcd18f8eb9ef0"
+      }
+    }
+  ],
+  "_class": "com.reactive.demo.model.Movie",
+  "year": 2000
+},
+{
+  "_id": {
+    "$oid": "67277c9665ddc339364aa0c8"
+  },
+  "name": "Movie 4 Update",
+  "director": "Movie 4 Director",
+  "details": {
+    "details": "Movie 4 details"
+  },
+  "actors": [
+    {
+      "$ref": "actors",
+      "$id": {
+        "$oid": "67262e9b07db71315210f56b"
+      }
+    }
+  ],
+  "_class": "com.reactive.demo.model.Movie",
+  "year": 1990
+},
+{
+  "_id": {
+    "$oid": "672f5f6666b10c6e272065b6"
+  },
+  "name": "Movie 5",
+  "year": 2005,
+  "director": "Director 5",
+  "details": {
+    "details": "This movie test our collection mapping"
+  },
+  "actors": [
+    {
+      "$ref": "actors",
+      "$id": {
+        "$oid": "65a285a8b9314f6b792a95aa"
+      }
+    },
+    {
+      "$ref": "actors",
+      "$id": {
+        "$oid": "65a285a8b9314f6b792a95ab"
+      }
+    }
+  ],
+  "_class": "com.reactive.demo.model.Movie"
+}]

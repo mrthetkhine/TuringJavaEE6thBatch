@@ -1,0 +1,112 @@
+[{
+  "_id": {
+    "$oid": "67337c612746d00cbfc12ea6"
+  },
+  "username": "admin",
+  "password": "$2a$10$TefFz.XRvfVcnarNB38GPORs2BC71QpHy6yaNjFVAGc3AWOI6vhSG",
+  "email": "admin@gmail.com",
+  "roles": [
+    {
+      "role": "ROLE_ADMIN"
+    }
+  ],
+  "_class": "com.reactive.demo.model.User"
+},
+{
+  "_id": {
+    "$oid": "67388a1b37d4730c06bf7877"
+  },
+  "username": "user",
+  "password": "$2a$10$cLMqu69Q.UJXW7ITdnnhuebsKwkOT0feZnrwfkecRJJS4sBmo9N5m",
+  "email": "admin@gmail.com",
+  "roles": [
+    {
+      "role": "ROLE_USER"
+    }
+  ],
+  "_class": "com.reactive.demo.model.User"
+},
+{
+  "_id": {
+    "$oid": "6738905ff67f087067101568"
+  },
+  "username": "admin3",
+  "password": "$2a$10$hxZUebDI7cTWdfw7ZpcDj.2FhIuN6FA5ab0z69nL0A3pMc6l8Bx1a",
+  "email": "admin3@gmail.com",
+  "roles": [
+    {
+      "role": "ROLE_ADMIN"
+    }
+  ],
+  "_class": "com.reactive.demo.model.User"
+},
+{
+  "_id": {
+    "$oid": "67389199c614327670abbc03"
+  },
+  "username": "user2",
+  "password": "$2a$10$Lfq6tFhn9iVqEiqDR1KeKuEkwHpmU2JgTEHELGiiI4YAplmJTfTJC",
+  "email": "user2@gmail.com",
+  "roles": [
+    {
+      "role": "ROLE_USER"
+    }
+  ],
+  "_class": "com.reactive.demo.model.User"
+},
+{
+  "_id": {
+    "$oid": "673892193809405aed11d4c1"
+  },
+  "username": "user3",
+  "password": "$2a$10$KSauWowNtK0dTHT/0rEHXOY/oyPRCxNmeO7l6bYAlcuXisVX.wri6",
+  "email": "user3@gmail.com",
+  "roles": [
+    {
+      "role": "ROLE_USER"
+    }
+  ],
+  "_class": "com.reactive.demo.model.User"
+},
+{
+  "_id": {
+    "$oid": "6738928c3809405aed11d4c4"
+  },
+  "username": "user4",
+  "password": "$2a$10$UAwXInycYPqxodqhIF7Lk.fjxEnMp7tESj.9EXBGspLlX9aIiLuqm",
+  "email": "user4@gmail.com",
+  "roles": [
+    {
+      "role": "ROLE_USER"
+    }
+  ],
+  "_class": "com.reactive.demo.model.User"
+},
+{
+  "_id": {
+    "$oid": "6738944919fdb5480b601bfc"
+  },
+  "username": "user5",
+  "password": "$2a$10$O2rR4AmdF64R/faLjIc5e.JszSPoA35z6M/GrDVDSn3D984CciOhy",
+  "email": "user5@gmail.com",
+  "roles": [
+    {
+      "role": "ROLE_USER"
+    }
+  ],
+  "_class": "com.reactive.demo.model.User"
+},
+{
+  "_id": {
+    "$oid": "673895a4900fc52a87c6009e"
+  },
+  "username": "user6",
+  "password": "$2a$10$lSaphfDizYPjMKMyiVEWEu/bSaoiP246pR8dXPShFI8H3D8rJBZJi",
+  "email": "user6@gmail.com",
+  "roles": [
+    {
+      "role": "ROLE_USER"
+    }
+  ],
+  "_class": "com.reactive.demo.model.User"
+}]

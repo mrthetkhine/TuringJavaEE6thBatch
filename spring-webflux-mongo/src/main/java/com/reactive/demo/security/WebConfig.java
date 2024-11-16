@@ -41,8 +41,9 @@ public class WebConfig {
 				.authorizeExchange(
 						exchanges -> 
 							exchanges.pathMatchers(HttpMethod.POST, "/login")
-							.permitAll()
-							.anyExchange().authenticated()
+								.permitAll()
+								.pathMatchers(HttpMethod.POST,"/register").hasRole("ADMIN")
+								.anyExchange().authenticated()
 							)
 				.addFilterAt(authenticationWebFilter, SecurityWebFiltersOrder.AUTHENTICATION)
 				.httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)

@@ -36,6 +36,9 @@ public class ReactiveUserDetailsServiceImpl implements ReactiveUserDetailsServic
                 .map(this::createSpringSecurityUser);
     }
 	private org.springframework.security.core.userdetails.User createSpringSecurityUser(User user) {
+		user.getRoles().forEach(role->{
+			log.info("Role -->"+ role.getRole());
+		});
         List<GrantedAuthority> grantedAuthorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getRole()))
                 .collect(Collectors.toList());
