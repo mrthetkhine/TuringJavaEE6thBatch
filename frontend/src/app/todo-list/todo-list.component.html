@@ -1,0 +1,7 @@
+<div>
+  <h1>Todo list</h1>
+  <app-todo-item [todo]="singleTodo"/>
+  @for(todo of todos;track todo.id){
+    <app-todo-item [todo]="todo"/>
+  }
+</div>
