@@ -28,4 +28,9 @@ export class TodoListComponent {
       }
     ]
   }
+  deleteTodo(todo:Todo)
+  {
+    console.log('Parent delete todo ',todo);
+    this.todos =this.todos.filter(item=>item.id != todo.id);
+  }
 }

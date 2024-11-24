@@ -1,5 +1,8 @@
 <div class="todo-container">
   <div>
     {{todo()?.title}}
+    &nbsp;
+    <button type="button" class="btn btn-primary"
+      (click)="deleteTodo()">Delete</button>
   </div>
 </div>

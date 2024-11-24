@@ -1,0 +1,10 @@
+<div>
+  <button type="button"
+          class="btn btn-primary"
+          (click)="addItem()">Add</button>
+  <h2>Item size {{listSize()}}</h2>
+  @for(item of list();track item){
+    <h3>{{item}}</h3>
+  }
+
+</div>
