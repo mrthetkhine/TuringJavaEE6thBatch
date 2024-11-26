@@ -20,4 +20,8 @@ export class TodoItemComponent {
     console.log('Delete todo ',this.todo());
     this.todoDeleted.emit(this.todo());
   }
+  ngOnDestroy()
+  {
+    console.log('ngOnDestroy');
+  }
 }

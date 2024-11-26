@@ -1,0 +1,14 @@
+.header
+{
+  min-width: 150px;
+  text-align: center;
+  display: inline-block;
+  border:1px solid lightgray;
+  min-height:30px;
+  /*border-radius: 2px;*/
+  cursor: pointer;
+}
+.active
+{
+  border-bottom: 3px solid gray;
+}

@@ -20,6 +20,15 @@ import {LayoutFooterComponent} from "./layout-footer/layout-footer.component";
 import {HostElementDemoComponent} from "./host-element-demo/host-element-demo.component";
 import {LifeCycleDemoComponent} from "./life-cycle-demo/life-cycle-demo.component";
 import {LifeCycleParentComponent} from "./life-cycle-parent/life-cycle-parent.component";
+import {ViewChildDemoComponent} from "./view-child-demo/view-child-demo.component";
+import {TabComponent} from "./tab/tab/tab.component";
+import {TabPageComponent} from "./tab/tab-page/tab-page.component";
+import {QueryLocatorDemoComponent} from "./query-locator-demo/query-locator-demo.component";
+import {DomDemoComponent} from "./dom-demo/dom-demo.component";
+import {BioComponent} from "./render/bio/bio.component";
+import {User} from "./user.model";
+import {AdminBioComponent} from "./render/admin-bio/admin-bio.component";
+import {UserBioComponent} from "./render/user-bio/user-bio.component";
 
 @Component({
   selector: 'app-root',
@@ -46,6 +55,14 @@ import {LifeCycleParentComponent} from "./life-cycle-parent/life-cycle-parent.co
     HostElementDemoComponent,
     /*LifeCycleDemoComponent,*/
     LifeCycleParentComponent,
+    ViewChildDemoComponent,
+    TabComponent,
+    TabPageComponent,
+    QueryLocatorDemoComponent,
+    DomDemoComponent,
+    BioComponent,
+   /* AdminBioComponent,
+    UserBioComponent,*/
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -55,6 +72,15 @@ export class AppComponent {
   message= "Hello";
   slideValue=0;// =  signal(100);
 
+  tabHeaders= ["Tab1","Tab2","Tab3"];
+  user:User;
+
+  constructor() {
+    this.user = {
+      isAdmin:false,
+      userName:"User"
+    }
+  }
   valueOnChange ()
   {
     console.log('Child slide value change ',this.slideValue);

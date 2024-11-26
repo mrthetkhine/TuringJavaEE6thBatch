@@ -1,4 +1,4 @@
-import {Component, input} from '@angular/core';
+import {afterNextRender, afterRender, Component, HostListener, input, SimpleChanges} from '@angular/core';
 
 @Component({
   selector: 'app-life-cycle-demo',
@@ -9,16 +9,38 @@ import {Component, input} from '@angular/core';
 })
 export class LifeCycleDemoComponent {
 
+  @HostListener('click', ['$event'])
+  mouseclick(event: MouseEvent) {
+    console.log('Click ',event);
+  }
+
   data=input<number>();
   constructor() {
     console.log('LifeCycleDemoComponent created');
+    afterNextRender(()=>console.log('AfterNextRender'));
+    afterRender(()=>{
+      console.log('After render');
+    });
   }
   ngOnInit()
   {
     console.log('ngOnInit Run once');
   }
-  ngOnChanges()
+  ngOnChanges(changes: SimpleChanges)
   {
-    console.log('ngOnChanges ');
+    console.log('ngOnChanges ',changes);
   }
+  ngDoCheck()
+  {
+    console.log('ngDoCheck');
+  }
+  ngAfterContentInit()
+  {
+    console.log('ngAfterContentInit');
+  }
+  ngAfterContentChecked()
+  {
+    console.log('ngAfterContentChecked');
+  }
+
 }

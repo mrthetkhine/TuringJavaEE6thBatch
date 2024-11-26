@@ -1,0 +1,10 @@
+<div>
+  <div class="tab-header">
+    @for(header of headers();track header;let ind = $index){
+    <div class="header" [class.active]="ind==activeIndex" (click)="tabHeaderClick(ind)">{{header}}</div>
+    }
+
+  </div>
+  <ng-content></ng-content>
+
+</div>
