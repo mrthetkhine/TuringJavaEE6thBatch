@@ -18,6 +18,8 @@ import {NgComponentOutlet} from "@angular/common";
 export class BioComponent {
   user = input.required<User>();
 
+  constructor() {
+  }
   getBioComponent()
   {
     return this.user()?.isAdmin?AdminBioComponent: UserBioComponent;

@@ -1,4 +1,4 @@
-import {Component, signal} from '@angular/core';
+import {Component, signal, ViewContainerRef} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {HelloWorldComponent} from "./hello-world/hello-world.component";
 import {ListItemComponent} from "./list-item/list-item.component";
@@ -29,6 +29,11 @@ import {BioComponent} from "./render/bio/bio.component";
 import {User} from "./user.model";
 import {AdminBioComponent} from "./render/admin-bio/admin-bio.component";
 import {UserBioComponent} from "./render/user-bio/user-bio.component";
+import {ViewContainerRefDemoComponent} from "./view-container-ref-demo/view-container-ref-demo.component";
+import {OuterContainerComponent} from "./outer-container/outer-container.component";
+import {LazyLoadingDemoComponent} from "./render/lazy-loading-demo/lazy-loading-demo.component";
+import {BindingComponent} from "./template-demo/binding/binding.component";
+import {TwoWayBindingComponent} from "./template-demo/two-way-binding/two-way-binding.component";
 
 @Component({
   selector: 'app-root',
@@ -63,6 +68,11 @@ import {UserBioComponent} from "./render/user-bio/user-bio.component";
     BioComponent,
    /* AdminBioComponent,
     UserBioComponent,*/
+    ViewContainerRefDemoComponent,
+    OuterContainerComponent,
+   /* LazyLoadingDemoComponent,*/
+    BindingComponent,
+    TwoWayBindingComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

@@ -1,0 +1,23 @@
+<html>
+    <script>
+        
+       let oldAddEventListener = window.addEventListener;
+       window.addEventListener = function(eventName, callback)
+       {
+           console.log(eventName, ' Change dected>>');
+           oldAddEventListener(eventName, callback);
+           console.log(eventName, ' ended');
+       }
+
+       
+    </script>
+    <body>
+        <button type="button" id="btnOk">Ok</button>
+    </body>
+    <script>
+        window.addEventListener('click',function()
+        {
+            console.log('Custom handler');
+        });
+    </script>
+</html>

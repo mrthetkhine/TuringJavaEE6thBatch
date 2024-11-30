@@ -1,0 +1,30 @@
+<div>
+  1+2 is {{1+2}}
+  <button type="button" class="btn btn-primary" (click)="validateForm()">
+    Valid Form
+  </button>
+
+  <button type="button" [disabled]="!formValid"
+        class="btn btn-primary">Save</button>
+
+  <button type="button" class="btn btn-primary" (click)="setTheme()">
+    Set theme
+  </button>
+  <button type="button" class="btn btn-primary" (click)="toggle()">
+    Toggle another
+  </button>
+  <div [class.theme]="useTheme"
+       [class.another]="useAnother">
+    This is theme
+  </div>
+  <div [class]="classGroup">
+    This is another using object
+  </div>
+  <button type="button" class="btn btn-primary" (click)="incFontSize()">
+    Font size ++
+  </button>
+  <div [style.fontSize.px]="fontSize">
+    Here is for the css style
+  </div>
+  <input type="text" (keyup)="updateField($event)" />
+</div>
