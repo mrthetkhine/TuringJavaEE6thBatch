@@ -1,0 +1,8 @@
+<div>
+  <p>This is a normal element</p>
+  <button class="btn btn-primary" (click)="show()">Show</button>
+  <ng-template #myFragment>
+    You've selected {{count}} items.
+  </ng-template>
+  <ng-container *ngTemplateOutlet="myFragment"></ng-container>
+</div>

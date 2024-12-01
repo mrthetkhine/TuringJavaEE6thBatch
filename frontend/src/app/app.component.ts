@@ -34,6 +34,14 @@ import {OuterContainerComponent} from "./outer-container/outer-container.compone
 import {LazyLoadingDemoComponent} from "./render/lazy-loading-demo/lazy-loading-demo.component";
 import {BindingComponent} from "./template-demo/binding/binding.component";
 import {TwoWayBindingComponent} from "./template-demo/two-way-binding/two-way-binding.component";
+import {ControlFlowComponent} from "./render/control-flow/control-flow.component";
+import {RenderLoopComponent} from "./render/render-loop/render-loop.component";
+import {SwitchDemoComponent} from "./render/switch-demo/switch-demo.component";
+import {PipeDemoComponent} from "./render/pipe-demo/pipe-demo.component";
+import {BaseButtonComponent} from "./render/base-button/base-button.component";
+import {NgTemplateDemoComponent} from "./render/ng-template-demo/ng-template-demo.component";
+import {CustomTabComponent} from "./render/custom-tab/custom-tab.component";
+import {CustomTabPageComponent} from "./render/custom-tab-page/custom-tab-page.component";
 
 @Component({
   selector: 'app-root',
@@ -70,9 +78,17 @@ import {TwoWayBindingComponent} from "./template-demo/two-way-binding/two-way-bi
     UserBioComponent,*/
     ViewContainerRefDemoComponent,
     OuterContainerComponent,
-   /* LazyLoadingDemoComponent,*/
+    LazyLoadingDemoComponent,
     BindingComponent,
     TwoWayBindingComponent,
+    ControlFlowComponent,
+    RenderLoopComponent,
+    SwitchDemoComponent,
+    PipeDemoComponent,
+    BaseButtonComponent,
+    NgTemplateDemoComponent,
+    CustomTabComponent,
+    CustomTabPageComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

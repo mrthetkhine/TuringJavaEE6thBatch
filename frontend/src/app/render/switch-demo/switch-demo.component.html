@@ -1,0 +1,24 @@
+<div>
+  <div>
+    @switch(status){
+      @case('loading'){
+        <h1>Loading</h1>
+      }
+      @case('success'){
+      <h1>Success</h1>
+      }
+      @case('failed'){
+        <h1>Failed</h1>
+      }
+      @default{
+        <h1>Others</h1>
+      }
+
+    }
+  </div>
+  <button type="button" class="btn btn-primary"
+          (click)="changeTo('success')">Success</button>
+  &nbsp;
+  <button type="button" class="btn btn-primary"
+          (click)="changeTo('failed')">Failed</button>
+</div>

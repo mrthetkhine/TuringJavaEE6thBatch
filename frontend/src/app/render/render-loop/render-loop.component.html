@@ -1,0 +1,12 @@
+<div>
+  Todo list
+  <ul>
+  @for( todo of todos;track todo.id;let idx=$index;let total=$count){
+    <ol>{{todo.title}} Index {{idx}} Total {{total}}</ol>
+  }
+  @empty{
+      <h1>list is empty</h1>
+    }
+  </ul>
+  <button type="button" class="btn btn-primary" (click)="load()">Load</button>
+</div>

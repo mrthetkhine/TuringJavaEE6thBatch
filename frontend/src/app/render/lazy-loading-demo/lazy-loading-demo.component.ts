@@ -14,9 +14,12 @@ import {NgComponentOutlet} from "@angular/common";
   styleUrl: './lazy-loading-demo.component.css'
 })
 export class LazyLoadingDemoComponent {
-  advancedSettings: {new(): BioComponent} |undefined = undefined;
+  //advancedSettings: {new(): BioComponent} |undefined = undefined;
+  advancedSettings: any = undefined;
+
   async loadAdvanced() {
     //const {BioComponent} = await import('./../bio/bio.component.js');
-    //this.advancedSettings = await import('./../bio/bio.component.js');
+    this.advancedSettings = await import('./../bio/bio.component.js');
+    console.log('Component ',this.advancedSettings);
   }
 }

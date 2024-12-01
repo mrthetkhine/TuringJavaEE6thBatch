@@ -26,10 +26,10 @@
   <app-user-account/>-->
 
   <!--<app-greeting [msg]="'Hi from app component'"/>-->
-  <div [style.fontSize.px]="slideValue">
+  <!--<div [style.fontSize.px]="slideValue">
     Parent slideValue {{slideValue}}
   </div>
-  <app-custom-slider [(value)]="slideValue" (valueChange)="valueOnChange()"/>
+  <app-custom-slider [(value)]="slideValue" (valueChange)="valueOnChange()"/>-->
   <!--<app-greet [message]="'hello from Angular'"/>-->
   <!--<app-input-with-getter-setter [value]="100" data="Hello"/>-->
  <!-- <app-counter/>-->
@@ -72,10 +72,29 @@
   <!--<app-dom-demo/>-->
  <!-- <app-bio [user]="user"/>-->
  <!-- <app-outer-container/>-->
-  <!--<app-lazy-loading-demo/>-->
+<!--  <app-lazy-loading-demo/>-->
   <!--<app-hello-world/>-->
  <!-- <app-binding/>-->
-  <app-two-way-binding/>
+  <!--<app-two-way-binding/>-->
+  <!--<app-control-flow/>-->
+  <!--<app-render-loop/>-->
+  <!--<app-switch-demo/>-->
+  <!--<app-pipe-demo/>-->
+  <!--<button app-base-button>
+    Next <span class="icon arrow-right" ></span>
+  </button>-->
+  <!--<app-ng-template-demo></app-ng-template-demo>-->
+  <app-custom-tab [headers]="tabHeaders">
+    <app-custom-tab-page>
+        One
+    </app-custom-tab-page>
+    <app-custom-tab-page>
+      Two
+    </app-custom-tab-page>
+    <app-custom-tab-page>
+      Three
+    </app-custom-tab-page>
+  </app-custom-tab>
 </main>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->

@@ -1,0 +1,40 @@
+<div>
+  @if(flag){
+    <h1>Flag is on</h1>
+  }
+  @else
+  {
+    <h1>Flag is off</h1>
+  }
+  <button type="button" class="btn btn-primary" (click)="toggle()">
+    Toggle
+  </button>
+  <form>
+    <div class="form-group">
+      <label>
+        Price
+      </label>
+      <input type="text" class="form-control" [(ngModel)]="price" [ngModelOptions]="{standalone: true}"/>
+    </div>
+    <div class="form-group">
+      <label>
+        Qty
+      </label>
+      <input type="text" class="form-control" [(ngModel)]="quantity" [ngModelOptions]="{standalone: true}"/>
+    </div>
+    <div class="form-group">
+      <label>
+        Total
+      </label>
+        {{price*quantity}}
+    </div>
+  </form>
+  <div>
+    User info
+    @if(user.profile.setting.startDate;as startDate){
+      {{
+        startDate
+      }}
+    }
+  </div>
+</div>
