@@ -1,0 +1,9 @@
+<div>
+  Defer demo
+  <div #greeting>Load to click defer container!</div>
+    @defer(on interaction(greeting)){
+      <app-defer-container/>
+    }@placeholder {
+    <p>Placeholder content</p>
+    }
+</div>

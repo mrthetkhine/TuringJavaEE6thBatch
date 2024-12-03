@@ -17,7 +17,12 @@
 
 <main >
 
-    Root Component
+  <nav>
+    <ul>
+      <li><a routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">Home</a></li>
+      <li><a routerLink="/todos" routerLinkActive="active" ariaCurrentWhenActive="page">Todos</a></li>
+    </ul>
+  </nav>
     <!--<app-hello-world/>
 
     <app-hello-world/>-->
@@ -84,7 +89,7 @@
     Next <span class="icon arrow-right" ></span>
   </button>-->
   <!--<app-ng-template-demo></app-ng-template-demo>-->
-  <app-custom-tab [headers]="tabHeaders">
+  <!--<app-custom-tab [headers]="tabHeaders">
     <app-custom-tab-page>
         One
     </app-custom-tab-page>
@@ -94,7 +99,18 @@
     <app-custom-tab-page>
       Three
     </app-custom-tab-page>
-  </app-custom-tab>
+  </app-custom-tab>-->
+  <!--<app-template-variable-demo/>-->
+  <!--<app-defer-demo/>-->
+  <!--<app-if-demo appHighlight/>
+  <p appHighlight="blue">Highlight me!</p>
+  <h1 appHighlight="green">Highlight me h1!</h1>-->
+ <!-- <app-unless-demo/>-->
+  <!--<app-times-demo/>-->
+  <!--<app-di-demo>
+
+  </app-di-demo>
+  <app-di-demo-two></app-di-demo-two>-->
 </main>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->

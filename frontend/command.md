@@ -3,3 +3,5 @@ ng generate c HelloWorld
 ng generate c ListItem
 ng generate class Todo --type=model
 ng generate p render/AllCapital
+ng generate directive directive/highlight
+ng generate s services/HellWorld

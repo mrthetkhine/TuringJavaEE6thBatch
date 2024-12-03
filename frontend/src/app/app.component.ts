@@ -1,5 +1,5 @@
 import {Component, signal, ViewContainerRef} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {HelloWorldComponent} from "./hello-world/hello-world.component";
 import {ListItemComponent} from "./list-item/list-item.component";
 import {UserAccountComponent} from "./user-account/user-account.component";
@@ -42,12 +42,28 @@ import {BaseButtonComponent} from "./render/base-button/base-button.component";
 import {NgTemplateDemoComponent} from "./render/ng-template-demo/ng-template-demo.component";
 import {CustomTabComponent} from "./render/custom-tab/custom-tab.component";
 import {CustomTabPageComponent} from "./render/custom-tab-page/custom-tab-page.component";
+import {TemplateVariableDemoComponent} from "./render/template-variable-demo/template-variable-demo.component";
+import {DeferDemoComponent} from "./render/defer-demo/defer-demo.component";
+import {IfDemoComponent} from "./directive/if-demo/if-demo.component";
+import {HighlightDirective} from "./directive/highlight.directive";
+import {UnlessDemoComponent} from "./directive/unless-demo/unless-demo.component";
+import {TimesDemoComponent} from "./directive/times-demo/times-demo.component";
+import {DiDemoComponent} from "./di-demo/di-demo.component";
+import {DiDemoTwoComponent} from "./di-demo-two/di-demo-two.component";
+
+import {HomePageComponent} from "./pages/home-page/home-page.component";
+import {TodosPageComponent} from "./pages/todos-page/todos-page.component";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
+    CommonModule,
     RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
+    
     HelloWorldComponent,
     ListItemComponent,
     UserAccountComponent,
@@ -89,6 +105,17 @@ import {CustomTabPageComponent} from "./render/custom-tab-page/custom-tab-page.c
     NgTemplateDemoComponent,
     CustomTabComponent,
     CustomTabPageComponent,
+    TemplateVariableDemoComponent,
+    DeferDemoComponent,
+    IfDemoComponent,
+    HighlightDirective,
+    UnlessDemoComponent,
+    TimesDemoComponent,
+    DiDemoComponent,
+    DiDemoTwoComponent,
+    HomePageComponent,
+    TodosPageComponent,
+
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -100,7 +127,7 @@ export class AppComponent {
 
   tabHeaders= ["Tab1","Tab2","Tab3"];
   user:User;
-
+  color = 'green';
   constructor() {
     this.user = {
       isAdmin:false,

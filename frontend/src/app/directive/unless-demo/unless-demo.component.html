@@ -1,0 +1,7 @@
+<div>
+  <p *appUnless="condition" class="unless a">
+    (A) This paragraph is displayed because the condition is false.
+  </p>
+  Condition {{condition}}
+  <button type="button" class="btn btn-primary" (click)="toggle()">Toggle</button>
+</div>
