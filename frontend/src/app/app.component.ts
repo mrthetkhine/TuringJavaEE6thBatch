@@ -54,6 +54,16 @@ import {DiDemoTwoComponent} from "./di-demo-two/di-demo-two.component";
 import {HomePageComponent} from "./pages/home-page/home-page.component";
 import {TodosPageComponent} from "./pages/todos-page/todos-page.component";
 import {CommonModule} from "@angular/common";
+import {NotFoundPageComponent} from "./pages/not-found-page/not-found-page.component";
+import {NestedRouteDemoComponent} from "./pages/nested-route-demo/nested-route-demo.component";
+import {ChildAComponent} from "./pages/child-a/child-a.component";
+import {ChildBComponent} from "./pages/child-b/child-b.component";
+import {TodoDetailsPageComponent} from "./pages/todo-details-page/todo-details-page.component";
+import {LazyPageComponent} from "./pages/lazy-page/lazy-page.component";
+import {AuthService} from "./services/auth.service";
+import {LoginPageComponent} from "./pages/login-page/login-page.component";
+import {ReactiveFormDemoComponent} from "./reactive-form-demo/reactive-form-demo.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -63,7 +73,9 @@ import {CommonModule} from "@angular/common";
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
-    
+   /* ReactiveFormsModule,*/
+
+
     HelloWorldComponent,
     ListItemComponent,
     UserAccountComponent,
@@ -113,8 +125,19 @@ import {CommonModule} from "@angular/common";
     TimesDemoComponent,
     DiDemoComponent,
     DiDemoTwoComponent,
+
     HomePageComponent,
     TodosPageComponent,
+    NotFoundPageComponent,
+    NestedRouteDemoComponent,
+    ChildAComponent,
+    ChildBComponent,
+    TodoDetailsPageComponent,
+    LazyPageComponent,
+    LoginPageComponent,
+
+    ReactiveFormDemoComponent,
+
 
   ],
   templateUrl: './app.component.html',
@@ -128,7 +151,8 @@ export class AppComponent {
   tabHeaders= ["Tab1","Tab2","Tab3"];
   user:User;
   color = 'green';
-  constructor() {
+
+  constructor(public authService:AuthService) {
     this.user = {
       isAdmin:false,
       userName:"User"
