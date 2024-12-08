@@ -53,7 +53,7 @@ import {DiDemoTwoComponent} from "./di-demo-two/di-demo-two.component";
 
 import {HomePageComponent} from "./pages/home-page/home-page.component";
 import {TodosPageComponent} from "./pages/todos-page/todos-page.component";
-import {CommonModule} from "@angular/common";
+import {CommonModule, NgIf} from "@angular/common";
 import {NotFoundPageComponent} from "./pages/not-found-page/not-found-page.component";
 import {NestedRouteDemoComponent} from "./pages/nested-route-demo/nested-route-demo.component";
 import {ChildAComponent} from "./pages/child-a/child-a.component";
@@ -64,6 +64,8 @@ import {AuthService} from "./services/auth.service";
 import {LoginPageComponent} from "./pages/login-page/login-page.component";
 import {ReactiveFormDemoComponent} from "./reactive-form-demo/reactive-form-demo.component";
 import {ReactiveFormsModule} from "@angular/forms";
+import {DynamicFormDemoComponent} from "./dynamic-form-demo/dynamic-form-demo.component";
+import {TemplateFormDemoComponent} from "./template-form-demo/template-form-demo.component";
 
 @Component({
   selector: 'app-root',
@@ -73,6 +75,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
+    NgIf,
    /* ReactiveFormsModule,*/
 
 
@@ -137,7 +140,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     LoginPageComponent,
 
     ReactiveFormDemoComponent,
-
+    DynamicFormDemoComponent,
+    TemplateFormDemoComponent,
 
   ],
   templateUrl: './app.component.html',

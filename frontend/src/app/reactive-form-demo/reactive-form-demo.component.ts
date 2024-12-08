@@ -1,9 +1,24 @@
 import {Component, inject} from '@angular/core';
-import {FormBuilder, ReactiveFormsModule} from '@angular/forms';
+import {AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, ValidatorFn} from '@angular/forms';
+import {Validators} from '@angular/forms';
+import {CommonModule, NgIf} from "@angular/common";
+
+export function startWithCapitalLetter(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value.toString();
+    const valid = value.charAt(0) == value.charAt(0).toString().toUpperCase();
+    //console.log('Validator value ',value, ' is valid ',valid);
+    return !valid ? {startWithCapitalLetter: {value: control.value}} : null;
+  };
+}
 @Component({
   selector: 'app-reactive-form-demo',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    NgIf,
+  ],
   templateUrl: './reactive-form-demo.component.html',
   styleUrl: './reactive-form-demo.component.css'
 })
@@ -11,8 +26,17 @@ export class ReactiveFormDemoComponent {
   private formBuilder = inject(FormBuilder);
 
   profileForm = this.formBuilder.group({
-    username: [''],
-    email: [''],
+    username: ['',[
+                Validators.required,
+                Validators.minLength(4),
+                startWithCapitalLetter()],
+
+            ],
+    email: ['',[
+        Validators.required,
+        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
+      ]
+    ],
   });
   onSubmit()
   {
@@ -20,15 +44,19 @@ export class ReactiveFormDemoComponent {
   }
   get username()
   {
-    return this.profileForm.controls.username.value;
+    return this.profileForm.controls.username;
+  }
+  get email()
+  {
+    return this.profileForm.controls.email;
   }
   set username(value)
   {
-    this.profileForm.controls.username.setValue(value);
+    //this.profileForm.controls.username.setValue(value);
   }
   updateName()
   {
-    this.username = 'Updated';
+    //this.profileForm.controls.username.setValue('Update');
   }
   updateProfile()
   {

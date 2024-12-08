@@ -1,0 +1,63 @@
+<div>
+    Dynamic form Demo
+  <form  [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Name: </label>
+      <input id="name"
+             class="form-control"
+             type="text"
+             formControlName="username"/>
+      @if(username.invalid && (username.dirty || username.touched)){
+      <div class="alert alert-danger">
+       @if(username.hasError('required'))
+      {
+      <div>Name is required new way</div>
+      }
+      @if(username.hasError('minlength'))
+      {
+      <div> Name must be at least 4 characters long.</div>
+      }
+      @if(username.errors?.['startWithCapitalLetter'])
+      {
+      <div>Username must start with capital letter</div>
+      }
+
+      </div>
+      }
+
+    </div>
+    <div formArrayName="phones">
+      <button type="button" (click)="addPhone()" class="btn btn-primary">+ Add another phone</button>
+    @for(phone of phones.controls;let i=$index;track i){
+      <div class="form-group">
+        <label for="phone-{{i}}">Phone: </label>
+        <input id="name"
+             class="form-control"
+             type="text"
+             [formControlName]="i"/>
+             @if(phone.invalid && (phone.dirty || phone.touched)){
+              <div class="alert alert-danger">
+                @if(phone.hasError('required'))
+                {
+                  <div>Phone is required </div>
+                }
+
+
+              </div>
+              }
+      </div>
+
+    }
+    </div>
+
+    <div class="form-group">
+      <label></label>
+      <button type="submit" class="btn btn-primary" [disabled]="profileForm.invalid">Submit</button>
+    </div>
+  </form>
+  <div class="form-group">
+    <label></label>
+    <!--<button type="button" class="btn btn-primary" (click)="updateName()">Update Name</button>
+    <button type="button" class="btn btn-primary" (click)="updateProfile()">Update Profile</button>-->
+  </div>
+</div>
