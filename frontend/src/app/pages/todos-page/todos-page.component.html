@@ -2,8 +2,8 @@
   <ul>
     @for(todo of todos;track todo;let index=$index){
       <li>
-        {{todo}} Id  {{index}}
-        <button type="button" class="btn btn-primary" (click)="gotoDetails(index)">Details</button>
+        {{todo.title}}
+        <button type="button" class="btn btn-primary" (click)="gotoDetails(todo)">Details</button>
       </li>
     }
   </ul>

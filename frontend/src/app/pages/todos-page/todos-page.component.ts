@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
+import {TodoService} from "../../services/todo.service";
+import {Todo} from "../../todo.model";
 
 @Component({
   selector: 'app-todos-page',
@@ -9,13 +11,22 @@ import {Router} from "@angular/router";
   styleUrl: './todos-page.component.css'
 })
 export class TodosPageComponent {
-  todos =['Task1','Task2','Task3']
+  todos:Todo[] = []
 
-  constructor(private router: Router  ) {
+  constructor(private router: Router,
+              private todoService: TodoService) {
   }
-  gotoDetails(index:number)
+
+  ngOnInit()
   {
-    console.log('Index ',index);
-    this.router.navigate(['todos',index]);
+    console.log('NgOnInit');
+    this.todoService.getAllTodo().subscribe(todos=>{
+      this.todos = todos;
+    });
+  }
+  gotoDetails(todo:Todo)
+  {
+    console.log('Index ',todo);
+    this.router.navigate(['todos',todo?.id]);
   }
 }

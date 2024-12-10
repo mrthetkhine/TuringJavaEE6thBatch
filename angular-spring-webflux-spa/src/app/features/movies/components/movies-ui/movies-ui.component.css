@@ -1,0 +1,9 @@
+.movie-container
+{
+  border:1px solid lightgray;
+  margin-left:20px;
+  margin-right:20px;
+  padding:10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}

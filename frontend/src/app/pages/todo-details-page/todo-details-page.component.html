@@ -1,3 +1,8 @@
 <div>
   Todo details page {{todoId}}
+  @if (todo$ | async; as todo) {
+  <p>Title: {{ todo.title }}</p>
+
+  }
+
 </div>

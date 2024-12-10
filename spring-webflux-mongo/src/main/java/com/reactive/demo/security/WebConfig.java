@@ -42,10 +42,20 @@ public class WebConfig {
 						exchanges -> 
 							exchanges.pathMatchers(HttpMethod.POST, "/login")
 								.permitAll()
+								
+								.pathMatchers(HttpMethod.GET, "/api/movies/**")
+								.permitAll()
+								.pathMatchers(HttpMethod.POST, "/api/movies/**")
+								.permitAll()
+								.pathMatchers(HttpMethod.PUT, "/api/movies/**")
+								.permitAll()
+								.pathMatchers(HttpMethod.DELETE, "/api/movies/**")
+								.permitAll()
+								
 								.pathMatchers(HttpMethod.POST,"/register").hasRole("ADMIN")
 								.anyExchange().authenticated()
 							)
-				.addFilterAt(authenticationWebFilter, SecurityWebFiltersOrder.AUTHENTICATION)
+				//.addFilterAt(authenticationWebFilter, SecurityWebFiltersOrder.AUTHENTICATION)
 				.httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
 				.formLogin(ServerHttpSecurity.FormLoginSpec::disable).csrf(ServerHttpSecurity.CsrfSpec::disable)
 				.cors(ServerHttpSecurity.CorsSpec::disable).build();
