@@ -20,6 +20,18 @@ export class MovieService {
   {
     return this._movies;
   }
+  getMovieById(movieId:string)
+  {
+    return this.moviesData.find(movie=>movie.id==movieId )||{
+      name:'',
+      year:0,
+      director:'',
+      genres:[],
+      details: {
+        details:''
+      }
+    };
+  }
   loadAllMovies()
   {
     this.httpClient.get<ApiResponse<Movie[]>>(BASE_URL+'/movies')

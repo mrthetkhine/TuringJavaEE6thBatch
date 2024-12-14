@@ -1,3 +1,5 @@
+import {Actor} from "./actor.model";
+
 interface MovieDetails{
   details:string;
 }
@@ -8,4 +10,5 @@ export interface Movie {
   director:string;
   genres:string[];
   details: MovieDetails;
+  actors?:Actor[];
 }
