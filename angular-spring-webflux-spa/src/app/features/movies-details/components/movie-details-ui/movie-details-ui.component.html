@@ -19,5 +19,6 @@
       <app-actor-ui [actor]="actor"/>
     }
   </div>
-
+  <app-movies-form [movieToEdit]="movie()"/>
+  <button type="button" class="btn btn-primary" (click)="showEditDialog()">Edit</button>
 </div>

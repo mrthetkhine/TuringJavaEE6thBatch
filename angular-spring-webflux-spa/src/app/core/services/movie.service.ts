@@ -44,6 +44,28 @@ export class MovieService {
       });
 
   }
+  saveMovie(movie:Movie,callback:(mv:Movie)=>void)
+  {
+    this.httpClient.post<ApiResponse<Movie>>(BASE_URL+'/movies',movie)
+      .subscribe(response=>{
+        let movie = response.data;
+        console.log('Save movie response ',movie);
+        this.moviesData.push(movie);
+        this.moviesSubject.next(this.moviesData);
+        callback(movie);
+      });
+  }
+  deleteMovie(movie:Movie,callback:(mv:Movie)=>void)
+  {
+    this.httpClient.delete<ApiResponse<Movie>>(BASE_URL+`/movies/${movie.id}`)
+      .subscribe(response=>{
+        let movie = response.data;
+        console.log('Delete movie response ',movie);
+        this.moviesData = this.moviesData.filter(m=>m.id != movie.id);
+        this.moviesSubject.next(this.moviesData);
+        callback(movie);
+      });
+  }
   addMovie()
   {
     const movie:Movie = {

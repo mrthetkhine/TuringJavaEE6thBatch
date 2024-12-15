@@ -14,3 +14,4 @@ ng generate c features/movies/components/MoviesPage
 ng generate c features/movies-details/components/MovieDetailsPage
 ng generate class core/model/Movie --type=model
 ng generate c features/movies/components/MoviesUI
+ng generate interceptor TokenInterceptor

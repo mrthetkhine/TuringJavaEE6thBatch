@@ -1,0 +1,163 @@
+
+
+<ng-template #movieFormDlg>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">New Movie</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form  [formGroup]="movieForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Name: </label>
+        <input id="name"
+               class="form-control"
+               type="text"
+               formControlName="name"/>
+        @if(name.invalid && (name.dirty || name.touched)){
+        <div class="alert alert-danger">
+           @if(name.hasError('required'))
+        {
+        <div>Name is required new way</div>
+        }
+        </div>
+        }
+
+      </div>
+
+      <div class="form-group">
+        <label for="year">Year </label>
+        <input id="year"
+               class="form-control"
+               type="text"
+               formControlName="year"/>
+        @if(year.invalid && (year.dirty || year.touched)){
+        <div class="alert alert-danger">
+           @if(year.hasError('required'))
+        {
+        <div>Year is required </div>
+        }
+        </div>
+        }
+
+      </div>
+      <div class="form-group">
+        <label for="director">Director </label>
+        <input id="director"
+               class="form-control"
+               type="text"
+               formControlName="director"/>
+        @if(director.invalid && (director.dirty || director.touched)){
+        <div class="alert alert-danger">
+           @if(director.hasError('required'))
+        {
+        <div>Director is required </div>
+        }
+        </div>
+        }
+
+      </div>
+      <div class="form-group">
+        <label for="details">Details </label>
+        <input id="details"
+               class="form-control"
+               type="text"
+               formControlName="details"/>
+        @if(details.invalid && (details.dirty || details.touched)){
+        <div class="alert alert-danger">
+           @if(details.hasError('required'))
+        {
+        <div>Details is required </div>
+        }
+        </div>
+        }
+
+      </div>
+
+      <div formArrayName="genres">
+
+        @for(genre of genres.controls;let i=$index;track genre){
+        <div class="form-group row">
+          <div class="col-sm-6">
+              <label for="genre-{{i}}" >Genre: </label>
+                  <input id="name"
+                   class="form-control"
+                   type="text"
+                   [formControlName]="i"/>
+                 @if(genre.invalid && (genre.dirty || genre.touched)){
+        <div class="alert alert-danger">
+          @if(genre.hasError('required'))
+          {
+          <div>Genre is required </div>
+          }
+
+
+        </div>
+        }
+        </div>
+        <div class="col-sm-6">
+           <label >&nbsp;</label>
+                <button type="button" (click)="deleteGenre(i)" class="btn btn-primary">-</button>
+              </div>
+
+            </div>
+
+        }
+
+        <button type="button" (click)="addGenre()" class="btn btn-primary">+ Add Genre</button>
+
+      </div>
+
+      <div formArrayName="actors">
+        @for(actor of $any(actors.controls);let i=$index;track actor){
+
+        <div class="container actor-container" [formGroupName]="i">
+          <button type="button" class="btn btn-primary" (click)="removeActor(i)">Remove</button>
+          <div class="form-group ">
+            <label for="firstName">FirstName </label>
+            <input id="firstName"
+                   class="form-control"
+                   type="text"
+                   formControlName="firstName"/>
+
+           @if(actor?.controls?.firstName.invalid && (actor?.controls?.firstName.dirty || actor?.controls?.firstName.touched)){
+        <div class="alert alert-danger">
+          @if(actor?.controls?.firstName.hasError('required'))
+          {
+          <div>FirstName is required </div>
+          }
+        </div>
+        }
+
+        </div>
+
+        <!-- last name-->
+        <div class="form-group ">
+        <label for="firstName">LastName </label>
+        <input id="lastName"
+               class="form-control"
+               type="text"
+               formControlName="lastName"/>
+
+       @if(actor?.controls?.lastName.invalid && (actor?.controls?.lastName.dirty || actor?.controls?.lastName.touched)){
+        <div class="alert alert-danger">
+          @if(actor?.controls?.lastName.hasError('required'))
+          {
+          <div>LastName is required </div>
+          }
+        </div>
+        }
+
+        </div>
+   </div>
+        }
+        <button type="button" (click)="addActor()" class="btn btn-primary">+  Actor</button>
+      </div>
+      <div class="form-group">
+        <label></label>
+        <button type="Submit" [disabled]="movieForm.invalid" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

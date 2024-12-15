@@ -5,9 +5,13 @@
   <h3> Title {{movie().name}}</h3>
   <div> Year {{movie().year}}</div>
   <div> Director {{movie().director}}</div>
+
+  &nbsp;
+  <button type="button" class="btn btn-primary" (click)="deleteMovie()">Delete</button>
+  &nbsp;&nbsp;
   @if(showDetails())
   {
-    <button type="button" class="btn btn-primary" (click)="gotoDetails()">Details</button>
+  <button type="button" class="btn btn-primary" (click)="gotoDetails()">Details</button>
+  &nbsp;
   }
-
 </div>

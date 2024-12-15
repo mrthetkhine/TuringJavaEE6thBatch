@@ -34,4 +34,5 @@ export class MovieDetailsPageComponent {
   {
     this.router.navigate(['/movies']);
   }
+
 }
