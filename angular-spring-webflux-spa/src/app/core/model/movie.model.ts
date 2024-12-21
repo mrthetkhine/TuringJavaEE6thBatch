@@ -1,6 +1,7 @@
 import {Actor} from "./actor.model";
 
 interface MovieDetails{
+  id?: string;
   details:string;
 }
 export interface Movie {

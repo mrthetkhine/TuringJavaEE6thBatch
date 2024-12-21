@@ -2,23 +2,22 @@
   <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/movie-poster-template-design-21a1c803fe4ff4b858de24f5c91ec57f_screen.jpg?ts=1636996180"
        width="100"
        height="150"/>
-  <h3> Title {{movie().name}}</h3>
-  <div> Year {{movie().year}}</div>
-  <div> Director {{movie().director}}</div>
+  <h3> Title {{movie()?.name}}</h3>
+  <div> Year {{movie()?.year}}</div>
+  <div> Director {{movie()?.director}}</div>
   <div>
     Genre
-    @for(genre of movie().genres;track genre)
+    @for(genre of movie()?.genres;track genre)
     {
     <span> {{genre}}</span>
     }
   </div>
   <div>
     Actors
-    @for(actor of movie().actors;track actor)
+    @for(actor of movie()?.actors;track actor)
     {
       <app-actor-ui [actor]="actor"/>
     }
   </div>
-  <app-movies-form [movieToEdit]="movie()"/>
-  <button type="button" class="btn btn-primary" (click)="showEditDialog()">Edit</button>
+
 </div>

@@ -13,7 +13,6 @@ import {MoviesFormComponent} from "../movies-form/movies-form.component";
   imports: [
     MoviesUIComponent,
     ModalModule,
-
     MoviesFormComponent,
   ],
 

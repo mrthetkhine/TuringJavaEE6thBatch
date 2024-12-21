@@ -22,15 +22,8 @@ export class MovieService {
   }
   getMovieById(movieId:string)
   {
-    return this.moviesData.find(movie=>movie.id==movieId )||{
-      name:'',
-      year:0,
-      director:'',
-      genres:[],
-      details: {
-        details:''
-      }
-    };
+    return this.httpClient.get<ApiResponse<Movie>>(BASE_URL+'/movies/'+movieId);
+
   }
   loadAllMovies()
   {
@@ -51,6 +44,17 @@ export class MovieService {
         let movie = response.data;
         console.log('Save movie response ',movie);
         this.moviesData.push(movie);
+        this.moviesSubject.next(this.moviesData);
+        callback(movie);
+      });
+  }
+  updateMovie(movie:Movie,callback:(mv:Movie)=>void)
+  {
+    this.httpClient.put<ApiResponse<Movie>>(BASE_URL+`/movies/${movie.id}`,movie)
+      .subscribe(response=>{
+        let movie = response.data;
+        console.log('Update movie response ',movie);
+        this.moviesData = this.moviesData.map(m=>m.id==movie.id? movie: m);
         this.moviesSubject.next(this.moviesData);
         callback(movie);
       });

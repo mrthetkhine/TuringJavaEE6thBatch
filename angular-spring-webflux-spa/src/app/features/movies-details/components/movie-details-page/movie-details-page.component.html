@@ -1,4 +1,6 @@
 <div>
   <button type="button" class="btn btn-primary" (click)="back()">Back</button>
-  <app-movie-details-ui [movie]="movie"/>
+  <app-movie-details-ui [movie]="movie" />
+  <app-movies-form [movieToEdit]="movie"/>
+  <button type="button" class="btn btn-primary" (click)="showEditDialog()">Edit</button>
 </div>

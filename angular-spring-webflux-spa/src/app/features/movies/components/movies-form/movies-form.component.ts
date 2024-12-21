@@ -25,7 +25,10 @@ export class MoviesFormComponent {
   @ViewChild('movieFormDlg', { read: TemplateRef }) movieFormDlgTemplate!:TemplateRef<any>;
 
   private formBuilder = inject(FormBuilder);
+  movieUpdatedCallback!:(updatedMovie:Movie)=>void;
+
   movieForm = this.formBuilder.group({
+    id: [''],
     name: ['',[Validators.required,],
 
     ],
@@ -47,21 +50,26 @@ export class MoviesFormComponent {
   }
   public openNewMovieModal()
   {
+    this.movieForm.reset();
     console.log('New movie modal dialog ',this.movieFormDlgTemplate);
     this.modalRef  = this.modalService.show(this.movieFormDlgTemplate, Object.assign({}, { class: 'modal-lg' }));
     console.log('ModelRef ',this.modalRef);
-    this.movieForm.reset();
+
   }
-  public openEditMovieModal()
+  public openEditMovieModal( callback:(updatedMovie:Movie)=>void)
   {
+    this.movieUpdatedCallback = callback;
+    this.movieForm.reset();
     let formData:any = this.movieToEdit();
     console.log('PatchValue ',formData);
+    for(let i=0;i< formData.actors.length;i++)
+    {
+      this.addActor();
+    }
     this.movieForm.patchValue(formData);
-  /*  this.movieForm.patchValue({
-        name: formData.name,
-        year:formData.year,
-        director: formData.director,
-    })*/
+    this.details.setValue(formData.details.details);
+    console.log('Movie to edit actors ',formData.actors);
+
     console.log('Edit movie modal dialog ',this.movieFormDlgTemplate);
     this.modalRef  = this.modalService.show(this.movieFormDlgTemplate, Object.assign({}, { class: 'modal-lg' }));
     console.log('ModelRef ',this.modalRef);
@@ -103,6 +111,7 @@ export class MoviesFormComponent {
   addActor()
   {
     let actor = this.formBuilder.group( {
+      id: [''],
       firstName: ['',[Validators.required]],
       lastName: ['',[Validators.required]]
     });
@@ -121,17 +130,48 @@ export class MoviesFormComponent {
   onSubmit()
   {
     console.log('Form submit ',this.movieForm.value);
-    let movie:any= {
-      ... this.movieForm.value,
-      details:{
-        details:this.movieForm.value.details
+    if(this.movieToEdit() )
+    {
+      this.updateMovie();
+    }
+    else {
+      this.saveNewMovie();
+    }
+
+  }
+
+  private updateMovie() {
+    //update
+    console.log('Movie update details ', this.movieToEdit()?.details);
+
+    let movie: any = {
+      ...this.movieForm.value,
+      details: {
+        details: this.movieForm.value.details
       }
     }
-    let callback = (movie:Movie)=>{
-      console.log('Movie saved callback ',movie);
+    console.log('Update movie ', movie);
+    let callback = (movie: Movie) => {
+      console.log('Movie update callback ', movie);
+      this.modalRef?.hide();
+      Swal.fire("Movie successfully updated");
+      this.movieUpdatedCallback(movie);
+    };
+    this.movieService.updateMovie(movie,callback);
+  }
+
+  private saveNewMovie() {
+    let movie: any = {
+      ...this.movieForm.value,
+      details: {
+        details: this.movieForm.value.details
+      }
+    }
+    let callback = (movie: Movie) => {
+      console.log('Movie saved callback ', movie);
       this.modalRef?.hide();
       Swal.fire("Movie successfully saved");
     };
-    this.movieService.saveMovie(movie,callback);
+    this.movieService.saveMovie(movie, callback);
   }
 }
