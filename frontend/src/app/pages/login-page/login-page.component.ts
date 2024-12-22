@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {AuthService} from "../../services/auth.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-login-page',
@@ -9,7 +10,16 @@ import {AuthService} from "../../services/auth.service";
   styleUrl: './login-page.component.css'
 })
 export class LoginPageComponent {
-  constructor(private authService:AuthService) {
+  redirectUrl ='';
+  constructor(
+    private route: ActivatedRoute,
+    private authService:AuthService,) {
+  }
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.redirectUrl = params['redirectUrl'];
+      console.log('Redirect url ',this.redirectUrl);
+    });
   }
   login()
   {

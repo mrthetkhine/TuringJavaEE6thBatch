@@ -1,6 +1,20 @@
 <div>
   <button type="button" class="btn btn-primary" (click)="back()">Back</button>
-  <app-movie-details-ui [movie]="movie" />
-  <app-movies-form [movieToEdit]="movie"/>
-  <button type="button" class="btn btn-primary" (click)="showEditDialog()">Edit</button>
+  <div>
+    <button type="button" class="btn btn-primary" (click)="showEditDialog()">Edit</button>
+    <app-movie-details-ui [movie]="movie" />
+    <app-movies-form [movieToEdit]="movie"/>
+
+  </div>
+
+    <app-review-form/>
+  <div>
+    &nbsp;&nbsp;
+    <button type="button" class="btn btn-primary" (click)="showNewRatingDialog()">New Rating</button>
+    @for(review of reviews;track review)
+    {
+    <app-review [review]="review"/>
+    }
+  </div>
+
 </div>

@@ -1,0 +1,40 @@
+
+
+<ng-template #reviewFormDlg>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">New Review</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form  [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Review: </label>
+        <input id="name"
+               class="form-control"
+               type="text"
+               formControlName="review"/>
+        @if(review.invalid && (review.dirty || review.touched)){
+        <div class="alert alert-danger">
+           @if(review.hasError('required'))
+        {
+        <div>Review is required </div>
+        }
+        </div>
+        }
+
+      </div>
+
+
+
+
+
+
+      <div class="form-group">
+        <label></label>
+        <button type="Submit" [disabled]="reviewForm.invalid" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</ng-template>

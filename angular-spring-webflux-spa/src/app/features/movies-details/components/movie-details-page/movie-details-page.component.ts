@@ -5,6 +5,9 @@ import {Movie} from "../../../../core/model/movie.model";
 
 import {MovieDetailsUIComponent} from "../movie-details-ui/movie-details-ui.component";
 import {MoviesFormComponent} from "../../../movies/components/movies-form/movies-form.component";
+import {Review} from "../../../../core/model/review.model";
+import {ReviewComponent} from "../review/review.component";
+import {ReviewFormComponent} from "../review-form/review-form.component";
 
 @Component({
   selector: 'app-movie-details-page',
@@ -12,6 +15,8 @@ import {MoviesFormComponent} from "../../../movies/components/movies-form/movies
   imports: [
     MovieDetailsUIComponent,
     MoviesFormComponent,
+    ReviewComponent,
+    ReviewFormComponent,
   ],
   templateUrl: './movie-details-page.component.html',
   styleUrl: './movie-details-page.component.css'
@@ -23,6 +28,20 @@ export class MovieDetailsPageComponent {
   @ViewChild(MoviesFormComponent)
   movieForm!: MoviesFormComponent;
 
+  @ViewChild(ReviewFormComponent)
+  reviewForm!: ReviewFormComponent;
+  reviews:Review[] =[
+    {
+      movie:'1',
+      review:'Good review1',
+      rating:3,
+    },
+    {
+      movie:'1',
+      review:'Review 2',
+      rating:3,
+    },
+  ]
   constructor(private route: ActivatedRoute,
               private router: Router,
               private movieService:MovieService,
@@ -56,6 +75,11 @@ export class MovieDetailsPageComponent {
   back()
   {
     this.router.navigate(['/movies']);
+  }
+  showNewRatingDialog()
+  {
+    console.log('Show new rating dialog');
+    this.reviewForm.openNewReviewModal();
   }
 
 }

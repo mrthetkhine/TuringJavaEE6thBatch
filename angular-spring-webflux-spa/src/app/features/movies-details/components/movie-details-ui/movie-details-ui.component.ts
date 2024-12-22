@@ -2,6 +2,7 @@ import {ChangeDetectorRef, Component, computed, input, model, SimpleChanges, Vie
 import {Movie} from "../../../../core/model/movie.model";
 import {ActorUIComponent} from "../../../movies/components/actor-ui/actor-ui.component";
 import {MoviesFormComponent} from "../../../movies/components/movies-form/movies-form.component";
+import {ReviewFormComponent} from "../review-form/review-form.component";
 
 @Component({
   selector: 'app-movie-details-ui',
@@ -9,6 +10,7 @@ import {MoviesFormComponent} from "../../../movies/components/movies-form/movies
   imports: [
     ActorUIComponent,
     MoviesFormComponent,
+    ReviewFormComponent,
   ],
   templateUrl: './movie-details-ui.component.html',
   styleUrl: './movie-details-ui.component.css'

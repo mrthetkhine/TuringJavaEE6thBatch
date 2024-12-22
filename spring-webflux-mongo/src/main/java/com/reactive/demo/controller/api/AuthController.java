@@ -7,6 +7,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.reactive.demo.common.ResponseUtil;
@@ -21,6 +22,7 @@ import reactor.core.publisher.Mono;
 
 @Slf4j
 @RestController
+@RequestMapping("/api")
 public class AuthController {
 
 	@Autowired
@@ -32,6 +34,7 @@ public class AuthController {
 	@PostMapping("/login")
 	Mono<ResponseEntity<RestResponse>> login(@Valid @RequestBody User user)
 	{
+		log.info("Login ",user);
 		return this.authService.login(user)
 					.flatMap(response->responseUtil.succesResponse(HttpStatus.OK,"Success",response))
 					.onErrorResume(err->responseUtil.errorResponse(HttpStatus.UNAUTHORIZED,"Invalid credential ",err.getMessage()));

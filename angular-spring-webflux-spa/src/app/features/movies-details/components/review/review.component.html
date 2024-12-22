@@ -1,0 +1,9 @@
+<div class="review-container">
+    <div>Review {{review()?.review}}</div>
+    <div>Rating
+      <rating [(ngModel)]="review().rating" [max]="5" [readonly]="isReadonly"></rating>
+    </div>
+    <button type="button" class="btn btn-primary">Edit</button>
+    &nbsp;
+    <button type="button" class="btn btn-primary">Delete</button>
+</div>
