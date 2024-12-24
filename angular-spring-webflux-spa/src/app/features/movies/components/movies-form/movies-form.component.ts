@@ -1,4 +1,4 @@
-import {Component, inject, input, TemplateRef, ViewChild} from '@angular/core';
+import {Component, inject, input, output, TemplateRef, ViewChild} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {BsModalRef, BsModalService} from "ngx-bootstrap/modal";
@@ -21,11 +21,11 @@ import Swal from "sweetalert2";
 export class MoviesFormComponent {
   movieToEdit = input<Movie>();
 
+  movieUpdated = output<Movie>();
   modalRef?: BsModalRef;
   @ViewChild('movieFormDlg', { read: TemplateRef }) movieFormDlgTemplate!:TemplateRef<any>;
 
   private formBuilder = inject(FormBuilder);
-  movieUpdatedCallback!:(updatedMovie:Movie)=>void;
 
   movieForm = this.formBuilder.group({
     id: [''],
@@ -56,9 +56,9 @@ export class MoviesFormComponent {
     console.log('ModelRef ',this.modalRef);
 
   }
-  public openEditMovieModal( callback:(updatedMovie:Movie)=>void)
+  public openEditMovieModal()
   {
-    this.movieUpdatedCallback = callback;
+
     this.movieForm.reset();
     let formData:any = this.movieToEdit();
     console.log('PatchValue ',formData);
@@ -155,7 +155,7 @@ export class MoviesFormComponent {
       console.log('Movie update callback ', movie);
       this.modalRef?.hide();
       Swal.fire("Movie successfully updated");
-      this.movieUpdatedCallback(movie);
+      this.movieUpdated.emit(movie);
     };
     this.movieService.updateMovie(movie,callback);
   }

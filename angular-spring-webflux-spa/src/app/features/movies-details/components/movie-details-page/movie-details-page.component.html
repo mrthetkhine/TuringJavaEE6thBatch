@@ -3,11 +3,11 @@
   <div>
     <button type="button" class="btn btn-primary" (click)="showEditDialog()">Edit</button>
     <app-movie-details-ui [movie]="movie" />
-    <app-movies-form [movieToEdit]="movie"/>
+    <app-movies-form [movieToEdit]="movie" (movieUpdated)="movieUpdated($event)"/>
 
   </div>
 
-    <app-review-form/>
+    <app-review-form [movieId]="movie?.id??''" />
   <div>
     &nbsp;&nbsp;
     <button type="button" class="btn btn-primary" (click)="showNewRatingDialog()">New Rating</button>

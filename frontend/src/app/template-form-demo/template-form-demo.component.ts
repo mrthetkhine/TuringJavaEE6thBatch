@@ -9,7 +9,6 @@ import {NgFor} from "@angular/common";
   imports: [
     FormsModule,
     NgFor,
-
   ],
   templateUrl: './template-form-demo.component.html',
   styleUrl: './template-form-demo.component.css'

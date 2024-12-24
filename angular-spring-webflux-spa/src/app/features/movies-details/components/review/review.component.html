@@ -3,7 +3,8 @@
     <div>Rating
       <rating [(ngModel)]="review().rating" [max]="5" [readonly]="isReadonly"></rating>
     </div>
-    <button type="button" class="btn btn-primary">Edit</button>
+    <app-review-form [movieId]="review()?.movie??''" [reviewToEdit]="review()" />
+    <button type="button" class="btn btn-primary" (click)="showEditRatingDialog()">Edit</button>
     &nbsp;
-    <button type="button" class="btn btn-primary">Delete</button>
+    <button type="button" class="btn btn-primary" (click)="deleteReview()">Delete</button>
 </div>

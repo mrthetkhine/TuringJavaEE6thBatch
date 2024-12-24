@@ -2,38 +2,38 @@
 
 <ng-template #reviewFormDlg>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">New Review</h4>
+    <h4 class="modal-title pull-left">{{reviewToEdit()?'Update Review':'New Review'}}</h4>
     <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
       <span aria-hidden="true" class="visually-hidden">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <form  [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit()" #reviewForm="ngForm">
       <div class="form-group">
         <label for="name">Review: </label>
         <input id="name"
                class="form-control"
                type="text"
-               formControlName="review"/>
-        @if(review.invalid && (review.dirty || review.touched)){
-        <div class="alert alert-danger">
-           @if(review.hasError('required'))
-        {
-        <div>Review is required </div>
-        }
+               [(ngModel)]="model.review"
+               name="review"
+               required
+               #review="ngModel"
+        >
+        <div [hidden]="review.valid || review.pristine"
+             class="alert alert-danger">
+          Review is required
         </div>
-        }
-
+      </div>
+      <div class="form-group">
+        <div>Rating
+          <rating [(ngModel)]="rating" [max]="5" [ngModelOptions]="{standalone: true}"></rating>
+        </div>
       </div>
 
-
-
-
-
-
       <div class="form-group">
-        <label></label>
-        <button type="Submit" [disabled]="reviewForm.invalid" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-success"
+                [disabled]="!reviewForm.form.valid">Submit</button>
+
       </div>
     </form>
   </div>

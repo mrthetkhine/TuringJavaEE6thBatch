@@ -8,6 +8,7 @@ import {MoviesFormComponent} from "../../../movies/components/movies-form/movies
 import {Review} from "../../../../core/model/review.model";
 import {ReviewComponent} from "../review/review.component";
 import {ReviewFormComponent} from "../review-form/review-form.component";
+import {ReviewService} from "../../../../core/services/review.service";
 
 @Component({
   selector: 'app-movie-details-page',
@@ -30,8 +31,9 @@ export class MovieDetailsPageComponent {
 
   @ViewChild(ReviewFormComponent)
   reviewForm!: ReviewFormComponent;
+
   reviews:Review[] =[
-    {
+   /* {
       movie:'1',
       review:'Good review1',
       rating:3,
@@ -40,11 +42,12 @@ export class MovieDetailsPageComponent {
       movie:'1',
       review:'Review 2',
       rating:3,
-    },
+    },*/
   ]
   constructor(private route: ActivatedRoute,
               private router: Router,
               private movieService:MovieService,
+              private reviewService:ReviewService,
               private ref: ChangeDetectorRef) {
   }
 
@@ -56,11 +59,18 @@ export class MovieDetailsPageComponent {
       this.movieService.getMovieById(this.movieId)
         .subscribe(response=>{
           this.movie = response.data;
+
         });
+      this.reviewService.review.subscribe(reviews=>{
+        console.log('Review services subscribed ',reviews.length);
+        this.reviews = reviews;
+      });
+      this.reviewService.loadAllReview(this.movieId);
+
     })
 
   }
-  movieUpdatedCallback(updatedMovie:Movie)
+  movieUpdated(updatedMovie:Movie)
   {
     console.log('MovieDetails Page movie update callback',updatedMovie);
     this.movie = updatedMovie;
@@ -69,7 +79,7 @@ export class MovieDetailsPageComponent {
   showEditDialog()
   {
     console.log('Show edit');
-    this.movieForm.openEditMovieModal(this.movieUpdatedCallback.bind(this));
+    this.movieForm.openEditMovieModal();
   }
 
   back()
